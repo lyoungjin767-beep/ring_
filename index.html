@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="3D 키링 NFC 태그 후 독립운동가 퀴즈와 정답 공개가 차례대로 이어지는 웹 서비스 화면입니다."
+    />
+    <title>기억해태 NFC 키링</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" data-step="1">
+      <section class="flow-board" aria-labelledby="page-title">
+        <div class="title-pill" id="page-title">
+          <span aria-hidden="true">★</span>
+          <strong>웹 서비스 단계별 화면 흐름</strong>
+          <span aria-hidden="true">★</span>
+        </div>
+
+        <div class="flow-grid" aria-live="polite">
+          <article class="stage stage-one is-active" data-stage="1">
+            <div class="stage-label">
+              <span class="stage-number">1</span>
+              <strong>NFC 태그</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억해태</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <button class="tag-scene" id="tagButton" type="button" aria-label="3D 키링 NFC 태그 시작">
+                <span class="keyring-model" aria-hidden="true">
+                  <span class="ring"></span>
+                  <span class="chain-link link-a"></span>
+                  <span class="chain-link link-b"></span>
+                  <span class="charm">
+                    <span class="person">
+                      <span class="hair"></span>
+                      <span class="face"></span>
+                      <span class="body"></span>
+                      <span class="leg left"></span>
+                      <span class="leg right"></span>
+                    </span>
+                    <span class="nfc-card">
+                      <span class="nfc-wave wave-a"></span>
+                      <span class="nfc-wave wave-b"></span>
+                      <span class="nfc-wave wave-c"></span>
+                      <span class="nfc-text">NFC</span>
+                    </span>
+                  </span>
+                </span>
+              </button>
+
+              <div class="scan-status" id="scanStatus">
+                <span class="nfc-icon" aria-hidden="true"></span>
+                <strong>NFC 태그 인식 중...</strong>
+                <span>잠시만 기다려주세요.</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="flow-arrow arrow-one" aria-hidden="true">›</div>
+
+          <article class="stage stage-two" data-stage="2">
+            <div class="stage-label">
+              <span class="stage-number">2</span>
+              <strong>이 인물이 누구일까요?</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억해태</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="quiz-panel" aria-labelledby="quiz-title">
+                <h1 id="quiz-title">이 인물이 누구일까요?</h1>
+                <div class="mystery-portrait" aria-hidden="true">
+                  <span class="mystery-head"></span>
+                  <span class="mystery-body"></span>
+                </div>
+
+                <div class="hint-list">
+                  <div class="hint">
+                    <span class="hint-icon" aria-hidden="true"></span>
+                    <p>힌트 1: 시인입니다</p>
+                  </div>
+                  <div class="hint">
+                    <span class="hint-icon" aria-hidden="true"></span>
+                    <p>힌트 2: 대표작에 별 헤는 밤이 있습니다</p>
+                  </div>
+                  <div class="hint">
+                    <span class="hint-icon" aria-hidden="true"></span>
+                    <p>힌트 3: 일제강점기 민족의식을 노래했습니다</p>
+                  </div>
+                </div>
+
+                <div class="answer-grid" id="answerGrid">
+                  <button type="button" class="answer-choice" data-correct="true">윤동주</button>
+                  <button type="button" class="answer-choice">윤봉길</button>
+                  <button type="button" class="answer-choice">유관순</button>
+                  <button type="button" class="answer-choice">안중근</button>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <div class="flow-arrow arrow-two" aria-hidden="true">›</div>
+
+          <article class="stage stage-three" data-stage="3">
+            <div class="stage-label">
+              <span class="stage-number">3</span>
+              <strong>정답 공개</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억해태</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="answer-panel" aria-labelledby="answer-title">
+                <h1 id="answer-title">이 인물은 바로<br />윤동주입니다!</h1>
+                <div class="yoon-card" aria-label="윤동주 흑백 초상 일러스트">
+                  <span class="portrait-bg"></span>
+                  <span class="portrait-hair"></span>
+                  <span class="portrait-face"></span>
+                  <span class="portrait-jacket"></span>
+                </div>
+                <h2>시인, 독립운동가</h2>
+                <p class="date">1917.12.30 - 1945.2.16</p>
+                <p class="bio">
+                  민족 시인으로, 시집 <strong>하늘과 바람과 별과 시</strong>를 통해
+                  저항과 성찰의 마음을 전했습니다.
+                </p>
+                <div class="next-card">
+                  <span aria-hidden="true">★</span>
+                  <p>다음으로 퀴즈를 풀어 독립운동에 참여해보세요!</p>
+                </div>
+              </section>
+            </div>
+          </article>
+        </div>
+
+        <nav class="flow-controls" aria-label="단계 제어">
+          <button class="restart-button" id="restartButton" type="button">처음부터</button>
+          <div class="step-dots" aria-hidden="true">
+            <span class="dot is-active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </nav>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
