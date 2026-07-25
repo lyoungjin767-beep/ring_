@@ -888,6 +888,10 @@ const introProfiles = {
     role: "대한민국 임시정부 주석, 독립운동가",
     date: "1876.8.29 - 1949.6.26",
     bio: "임시정부 활동과 한인애국단 조직으로 독립운동의 중심을 이끌었습니다.",
+    image: {
+      src: "assets/kim-gu.jpg",
+      alt: "김구 사진",
+    },
   },
   유관순: {
     answer: "유관순",
@@ -896,6 +900,10 @@ const introProfiles = {
     role: "3.1운동 독립운동가",
     date: "1902.12.16 - 1920.9.28",
     bio: "아우내 장터 만세운동을 주도하고 옥중에서도 독립 의지를 지켰습니다.",
+    image: {
+      src: "assets/yu-gwan-sun.jpg",
+      alt: "유관순 사진",
+    },
   },
   윤봉길: {
     answer: "윤봉길",
@@ -904,6 +912,10 @@ const introProfiles = {
     role: "한인애국단 독립운동가",
     date: "1908.6.21 - 1932.12.19",
     bio: "상하이 홍커우 공원 의거로 일제 침략의 부당함을 세계에 알렸습니다.",
+    image: {
+      src: "assets/yoon-bong-gil.jpg",
+      alt: "윤봉길 사진",
+    },
   },
   안중근: {
     answer: "안중근",
