@@ -198,7 +198,7 @@ const choiceMarkers = ["①", "②", "③", "④", "⑤"];
 const app = document.querySelector(".app");
 const stages = [...document.querySelectorAll(".stage")];
 const dots = [...document.querySelectorAll(".dot")];
-const tagButton = document.querySelector("#tagButton");
+const tagButtons = [...document.querySelectorAll(".nfc-select-card")];
 const restartButton = document.querySelector("#restartButton");
 const answerGrid = document.querySelector("#answerGrid");
 const scanStatus = document.querySelector("#scanStatus");
@@ -226,6 +226,7 @@ const keywordNote = document.querySelector("#keywordNote");
 let tagTimer;
 let quizResolved = false;
 let currentQuestionIndex = 0;
+let selectedNfcName = "";
 
 function clearTagTimer() {
   if (!tagTimer) return;
@@ -290,29 +291,41 @@ function resetFlow() {
   clearTagTimer();
   quizResolved = false;
   app.dataset.reading = "false";
-  tagButton.disabled = false;
-  scanTitle.textContent = "NFC 키링을 태그해주세요";
-  scanText.textContent = "키링을 가까이 대면 다음 화면으로 넘어갑니다.";
+  selectedNfcName = "";
+  tagButtons.forEach((button) => {
+    button.disabled = false;
+    button.classList.remove("is-selected");
+  });
+  scanTitle.textContent = "NFC 인물을 선택해주세요";
+  scanText.textContent = "인형 대신 원하는 NFC 카드를 클릭하면 다음 화면으로 넘어갑니다.";
   resetChoices();
   setStep(1);
 }
 
-function startTagFlow() {
+function startTagFlow(event) {
   if (app.dataset.reading === "true") return;
+
+  const selectedButton = event.currentTarget;
+  selectedNfcName = selectedButton.dataset.person || "선택한 인물";
 
   clearTagTimer();
   app.dataset.reading = "true";
-  tagButton.disabled = true;
-  scanTitle.textContent = "NFC 태그 인식 중...";
+  tagButtons.forEach((button) => {
+    button.disabled = true;
+    button.classList.toggle("is-selected", button === selectedButton);
+  });
+  scanTitle.textContent = `${selectedNfcName} NFC 태그 인식 중...`;
   scanText.textContent = "키링 정보를 불러오고 있습니다.";
 
   tagTimer = window.setTimeout(() => {
     app.dataset.reading = "false";
-    scanTitle.textContent = "NFC 태그 완료";
+    scanTitle.textContent = `${selectedNfcName} NFC 태그 완료`;
     scanText.textContent = "퀴즈 화면으로 이동합니다.";
 
     window.setTimeout(() => {
-      tagButton.disabled = false;
+      tagButtons.forEach((button) => {
+        button.disabled = false;
+      });
       setStep(2);
     }, 360);
   }, 1050);
@@ -351,7 +364,7 @@ function showNextQuizQuestion() {
   renderQuizQuestion();
 }
 
-tagButton.addEventListener("click", startTagFlow);
+tagButtons.forEach((button) => button.addEventListener("click", startTagFlow));
 restartButton.addEventListener("click", resetFlow);
 nextToQuizGuide.addEventListener("click", () => setStep(4));
 guideNextButton.addEventListener("click", () => setStep(5));

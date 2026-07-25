@@ -155,7 +155,230 @@ button {
   perspective: 900px;
 }
 
-.tag-scene:focus-visible,
+.nfc-select-grid {
+  width: 100%;
+  min-height: 345px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background:
+    linear-gradient(130deg, rgba(255, 255, 255, 0.86), rgba(219, 229, 212, 0.58)),
+    radial-gradient(circle at center, rgba(190, 140, 61, 0.18), transparent 52%);
+}
+
+.nfc-select-card {
+  position: relative;
+  min-height: 105px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(45, 36, 28, 0.18);
+  border-radius: 8px;
+  color: var(--ink);
+  background: #fffdf8;
+  box-shadow: 0 10px 22px rgba(71, 48, 26, 0.1);
+  cursor: pointer;
+  letter-spacing: 0;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease,
+    opacity 180ms ease;
+}
+
+.nfc-select-card:nth-child(5) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 5px);
+}
+
+.nfc-select-card::after {
+  content: "NFC";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  color: #fff;
+  background: rgba(33, 27, 23, 0.84);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.nfc-select-card:hover,
+.nfc-select-card.is-selected {
+  transform: translateY(-2px);
+  border-color: var(--teal);
+  background: #f3fbf7;
+  box-shadow:
+    0 12px 24px rgba(41, 111, 104, 0.16),
+    0 0 0 3px rgba(41, 111, 104, 0.13);
+}
+
+.nfc-select-card:disabled {
+  cursor: default;
+}
+
+.nfc-select-card:not(.is-selected):disabled {
+  opacity: 0.58;
+}
+
+.nfc-select-card strong {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  padding-inline: 5px;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.16;
+  text-align: center;
+  overflow-wrap: anywhere;
+  word-break: keep-all;
+}
+
+.nfc-choice-mark {
+  position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  display: block;
+  border: 3px solid #1b1713;
+  border-radius: 50%;
+  background: #f7dfb9;
+  box-shadow:
+    inset -6px -5px 0 rgba(33, 27, 23, 0.08),
+    0 8px 12px rgba(41, 32, 24, 0.16);
+}
+
+.nfc-choice-mark::before,
+.nfc-choice-mark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nfc-choice-mark::before {
+  top: 8px;
+  width: 31px;
+  height: 18px;
+  border-radius: 17px 17px 8px 8px;
+  background: #1f1a16;
+}
+
+.nfc-choice-mark::after {
+  bottom: 6px;
+  width: 36px;
+  height: 17px;
+  border-radius: 13px 13px 10px 10px;
+  background: #2d241c;
+}
+
+.nfc-choice-face {
+  position: absolute;
+  top: 19px;
+  left: 50%;
+  width: 27px;
+  height: 24px;
+  transform: translateX(-50%);
+  border: 2px solid #1b1713;
+  border-radius: 45% 45% 48% 48%;
+  background: #f0c8a2;
+}
+
+.nfc-choice-face::before,
+.nfc-choice-face::after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  width: 3px;
+  height: 4px;
+  border-radius: 50%;
+  background: #1b1713;
+}
+
+.nfc-choice-face::before {
+  left: 7px;
+}
+
+.nfc-choice-face::after {
+  right: 7px;
+}
+
+.nfc-choice-wave {
+  position: absolute;
+  top: -5px;
+  right: -7px;
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--teal);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  transform: rotate(45deg);
+}
+
+.nfc-choice-wave::before,
+.nfc-choice-wave::after {
+  content: "";
+  position: absolute;
+  border: 3px solid var(--teal);
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+}
+
+.nfc-choice-wave::before {
+  inset: 4px;
+}
+
+.nfc-choice-wave::after {
+  inset: 11px;
+}
+
+.figure-yoon .nfc-choice-mark {
+  background: #f7dfb9;
+}
+
+.figure-kim .nfc-choice-mark {
+  background: #d6e4df;
+}
+
+.figure-kim .nfc-choice-mark::after {
+  background: #1f4f4b;
+}
+
+.figure-yu .nfc-choice-mark {
+  background: #f3d7df;
+}
+
+.figure-yu .nfc-choice-mark::after {
+  background: #753b4d;
+}
+
+.figure-yun .nfc-choice-mark {
+  background: #e8d7bb;
+}
+
+.figure-yun .nfc-choice-mark::after {
+  background: #8a4a35;
+}
+
+.figure-ahn .nfc-choice-mark {
+  background: #d8e0ef;
+}
+
+.figure-ahn .nfc-choice-mark::after {
+  background: #2f4059;
+}
+
+.nfc-select-card:focus-visible,
 .restart-button:focus-visible,
 .answer-choice:focus-visible,
 .next-action:focus-visible,
@@ -1327,7 +1550,7 @@ button {
   background: var(--gold);
 }
 
-.app[data-reading="true"] .keyring-model {
+.app[data-reading="true"] .nfc-select-card.is-selected .nfc-choice-mark {
   animation: tagPulse 880ms ease-in-out infinite;
 }
 
@@ -1404,6 +1627,29 @@ button {
     max-width: 220px;
     overflow-wrap: anywhere;
     font-size: 17px;
+  }
+
+  .nfc-select-grid {
+    min-height: 330px;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .nfc-select-card {
+    min-height: 98px;
+  }
+
+  .nfc-select-card:nth-child(5) {
+    width: calc(50% - 4px);
+  }
+
+  .nfc-select-card strong {
+    font-size: 14px;
+  }
+
+  .nfc-choice-mark {
+    width: 50px;
+    height: 50px;
   }
 
   .keyring-model {

@@ -27,33 +27,48 @@
                 </button>
               </header>
 
-              <button class="tag-scene" id="tagButton" type="button" aria-label="3D 키링 NFC 태그 시작">
-                <span class="keyring-model" aria-hidden="true">
-                  <span class="ring"></span>
-                  <span class="chain-link link-a"></span>
-                  <span class="chain-link link-b"></span>
-                  <span class="charm">
-                    <span class="person">
-                      <span class="hair"></span>
-                      <span class="face"></span>
-                      <span class="body"></span>
-                      <span class="leg left"></span>
-                      <span class="leg right"></span>
-                    </span>
-                    <span class="nfc-card">
-                      <span class="nfc-wave wave-a"></span>
-                      <span class="nfc-wave wave-b"></span>
-                      <span class="nfc-wave wave-c"></span>
-                      <span class="nfc-text">NFC</span>
-                    </span>
+              <div class="nfc-select-grid" aria-label="NFC 인물 선택">
+                <button class="nfc-select-card figure-yoon" type="button" data-person="윤동주" aria-label="윤동주 NFC 선택">
+                  <span class="nfc-choice-mark" aria-hidden="true">
+                    <span class="nfc-choice-face"></span>
+                    <span class="nfc-choice-wave"></span>
                   </span>
-                </span>
-              </button>
+                  <strong>윤동주 NFC</strong>
+                </button>
+                <button class="nfc-select-card figure-kim" type="button" data-person="김구" aria-label="김구 NFC 선택">
+                  <span class="nfc-choice-mark" aria-hidden="true">
+                    <span class="nfc-choice-face"></span>
+                    <span class="nfc-choice-wave"></span>
+                  </span>
+                  <strong>김구 NFC</strong>
+                </button>
+                <button class="nfc-select-card figure-yu" type="button" data-person="유관순" aria-label="유관순 NFC 선택">
+                  <span class="nfc-choice-mark" aria-hidden="true">
+                    <span class="nfc-choice-face"></span>
+                    <span class="nfc-choice-wave"></span>
+                  </span>
+                  <strong>유관순 NFC</strong>
+                </button>
+                <button class="nfc-select-card figure-yun" type="button" data-person="윤봉길" aria-label="윤봉길 NFC 선택">
+                  <span class="nfc-choice-mark" aria-hidden="true">
+                    <span class="nfc-choice-face"></span>
+                    <span class="nfc-choice-wave"></span>
+                  </span>
+                  <strong>윤봉길 NFC</strong>
+                </button>
+                <button class="nfc-select-card figure-ahn" type="button" data-person="안중근" aria-label="안중근 NFC 선택">
+                  <span class="nfc-choice-mark" aria-hidden="true">
+                    <span class="nfc-choice-face"></span>
+                    <span class="nfc-choice-wave"></span>
+                  </span>
+                  <strong>안중근 NFC</strong>
+                </button>
+              </div>
 
               <div class="scan-status" id="scanStatus">
                 <span class="nfc-icon" aria-hidden="true"></span>
-                <strong>NFC 키링을 태그해주세요</strong>
-                <span>키링을 가까이 대면 다음 화면으로 넘어갑니다.</span>
+                <strong>NFC 인물을 선택해주세요</strong>
+                <span>인형 대신 원하는 NFC 카드를 클릭하면 다음 화면으로 넘어갑니다.</span>
               </div>
             </div>
           </article>
