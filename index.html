@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="3D 키링 NFC 태그 후 독립운동가 퀴즈와 정답 공개가 차례대로 이어지는 웹 서비스 화면입니다."
+    />
+    <title>기억하링 NFC 키링</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app" data-step="1">
+      <section class="flow-board" aria-label="NFC 키링 퀴즈 화면">
+        <div class="flow-grid" aria-live="polite">
+          <article class="stage stage-one is-active" data-stage="1">
+            <div class="stage-label">
+              <span class="stage-number">1</span>
+              <strong>NFC 태그</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <div class="nfc-card-grid" aria-label="NFC 인물 선택">
+                <button class="nfc-person-card yoon" type="button" data-person="yoon"><span class="nfc-avatar"></span><b>윤동주 NFC</b><i>NFC</i></button>
+                <button class="nfc-person-card kim" type="button" data-person="kim"><span class="nfc-avatar"></span><b>김구 NFC</b><i>NFC</i></button>
+                <button class="nfc-person-card yu" type="button" data-person="yu"><span class="nfc-avatar"></span><b>유관순 NFC</b><i>NFC</i></button>
+                <button class="nfc-person-card bong" type="button" data-person="bong"><span class="nfc-avatar"></span><b>윤봉길 NFC</b><i>NFC</i></button>
+                <button class="nfc-person-card ahn" type="button" data-person="ahn"><span class="nfc-avatar"></span><b>안중근 NFC</b><i>NFC</i></button>
+              </div>
+
+              <div class="scan-status" id="scanStatus">
+                <span class="nfc-icon" aria-hidden="true"></span>
+                <strong>NFC 인물을 선택해주세요</strong>
+                <span>원하는 NFC 카드를 클릭하면 다음 화면으로 넘어갑니다.</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="flow-arrow arrow-one" aria-hidden="true">›</div>
+
+          <article class="stage stage-two" data-stage="2">
+            <div class="stage-label">
+              <span class="stage-number">2</span>
+              <strong>이 인물이 누구일까요?</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="quiz-panel" aria-labelledby="quiz-title">
+                <h1 id="quiz-title">이 인물이 누구일까요?</h1>
+                <div class="mystery-portrait" aria-hidden="true">
+                  <span class="mystery-head"></span>
+                  <span class="mystery-body"></span>
+                </div>
+
+                <div class="hint-list">
+                  <div class="hint">
+                    <span class="hint-icon" aria-hidden="true"></span>
+                    <p id="hintOne">힌트 1: 시인입니다</p>
+                  </div>
+                  <div class="hint">
+                    <span class="hint-icon" aria-hidden="true"></span>
+                    <p id="hintTwo">힌트 2: 대표작에 별 헤는 밤이 있습니다</p>
+                  </div>
+                  <div class="hint">
+                    <span class="hint-icon" aria-hidden="true"></span>
+                    <p id="hintThree">힌트 3: 일제강점기 민족의식을 노래했습니다</p>
+                  </div>
+                </div>
+
+                <div class="answer-grid" id="answerGrid">
+                  <button type="button" class="answer-choice" data-correct="true">윤동주</button>
+                  <button type="button" class="answer-choice">윤봉길</button>
+                  <button type="button" class="answer-choice">유관순</button>
+                  <button type="button" class="answer-choice">안중근</button>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <div class="flow-arrow arrow-two" aria-hidden="true">›</div>
+
+          <article class="stage stage-three" data-stage="3">
+            <div class="stage-label">
+              <span class="stage-number">3</span>
+              <strong>정답 공개</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="answer-panel" aria-labelledby="answer-title">
+                <h1 id="answer-title">이 인물은 바로<br />윤동주입니다!</h1>
+                <img class="yoon-card" id="profileImage" src="assets/yoon-dongju.png" alt="윤동주 흑백 사진" />
+                <h2 id="profileRole">시인, 독립운동가</h2>
+                <p class="date" id="profileDate">1917.12.30 - 1945.2.16</p>
+                <p class="bio" id="profileBio">
+                  민족 시인으로, 시집 <strong>하늘과 바람과 별과 시</strong>를 통해
+                  저항과 성찰의 마음을 전했습니다.
+                </p>
+                <button class="next-card next-action" id="nextToQuizGuide" type="button">
+                  <span aria-hidden="true">★</span>
+                  <p id="profileNextCopy">다음으로 퀴즈를 풀어 독립운동에 참여해보세요!</p>
+                </button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-four" data-stage="4">
+            <div class="stage-label">
+              <span class="stage-number">4</span>
+              <strong>퀴즈 안내</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="guide-panel" aria-labelledby="guide-title">
+                <h1 id="guide-title">독립운동 기억 퀴즈</h1>
+                <div class="guide-list">
+                  <div class="guide-item">
+                    <span class="guide-icon list-icon" aria-hidden="true"></span>
+                    <strong>총 5세트</strong>
+                  </div>
+                  <div class="guide-item">
+                    <span class="guide-icon checklist-icon" aria-hidden="true"></span>
+                    <strong>1세트당 5문제</strong>
+                  </div>
+                  <div class="guide-item">
+                    <span class="guide-icon stamp-icon" aria-hidden="true"></span>
+                    <strong>총 25문제 완료 시<br />도장 1개 획득</strong>
+                  </div>
+                </div>
+
+                <div class="level-preview" aria-label="퀴즈 세트">
+                  <span>1세트</span>
+                  <span>2세트</span>
+                  <span>3세트</span>
+                  <span>4세트</span>
+                  <span>5세트</span>
+                </div>
+
+                <div class="quiz-note">
+                  <p>인물 관련 내용 +<br />독립운동 전반 퀴즈가 출제됩니다.</p>
+                </div>
+
+                <button class="primary-action" id="guideNextButton" type="button">시작하기</button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-five" data-stage="5">
+            <div class="stage-label">
+              <span class="stage-number">5</span>
+              <strong>단계 진행</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="level-panel" aria-labelledby="level-title">
+                <h1 id="level-title">단계를 따라 퀴즈를 완성하세요.</h1>
+                <div class="level-choice-grid stage-roadmap" aria-label="퀴즈 진행 단계">
+                  <span class="level-choice is-current">1단계</span>
+                  <span class="level-choice is-locked">2단계</span>
+                  <span class="level-choice is-locked">3단계</span>
+                  <span class="level-choice is-locked">4단계</span>
+                  <span class="level-choice is-locked">5단계</span>
+                </div>
+                <button class="primary-action start-set-action" id="startSetButton" type="button">1단계 시작하기</button>
+
+                <div class="stamp-board">
+                  <strong>내 도장 현황</strong>
+                  <div class="stamp-row" aria-label="획득 도장 0개">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <b>0/5</b>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-six" data-stage="6">
+            <div class="stage-label">
+              <span class="stage-number">6</span>
+              <strong>퀴즈 풀기</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="play-panel" aria-labelledby="play-title">
+                <div class="quiz-progress">
+                  <span id="quizProgressLabel">1세트 / 5문제 중 1문제</span>
+                  <strong id="quizProgressCount">1/5</strong>
+                </div>
+                <div class="progress-track" aria-hidden="true">
+                  <span id="quizProgressBar"></span>
+                </div>
+
+                <h1 id="play-title">윤동주의 대표작으로<br />옳은 것은?</h1>
+                <div class="play-answer-grid" id="quizAnswerGrid">
+                  <button class="quiz-answer-choice" type="button">
+                    하늘과 바람과 별과 시
+                  </button>
+                  <button class="quiz-answer-choice" type="button">별 헤는 밤</button>
+                  <button class="quiz-answer-choice" type="button">서시</button>
+                  <button class="quiz-answer-choice" type="button">진달래꽃</button>
+                </div>
+
+                <p class="quiz-feedback" id="quizFeedback">인물 관련 질문과 독립운동 전반에 대한 질문이 출제됩니다.</p>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-seven" data-stage="7">
+            <div class="stage-label">
+              <span class="stage-number">7</span>
+              <strong>정답 &amp; 해설</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="explain-panel" aria-labelledby="explain-title">
+                <h1 id="explain-title">정답입니다!</h1>
+                <div class="red-portrait" aria-label="윤동주 초상">
+                  <img src="assets/yoon-dongju.png" alt="" />
+                </div>
+                <div class="explain-box">
+                  <strong>해설</strong>
+                  <p>
+                    윤동주는 <strong>하늘과 바람과 별과 시</strong>에 실린 다양한 작품을 통해
+                    일제강점기의 아픔과 민족의식을 노래했습니다.
+                  </p>
+                </div>
+                <button class="primary-action" id="explainNextButton" type="button">다음 문제</button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-eight" data-stage="8">
+            <div class="stage-label">
+              <span class="stage-number">8</span>
+              <strong>도장 획득</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="stamp-panel" aria-labelledby="stamp-title">
+                <h1 id="stamp-title">25문제를 모두 완료했어요!<br />도장 1개를 획득했습니다.</h1>
+                <div class="stamp-medal" aria-hidden="true">
+                  <img src="assets/yoon-dongju.png" alt="" />
+                </div>
+                <div class="stamp-board is-earned">
+                  <strong>내 도장 현황</strong>
+                  <div class="stamp-row" aria-label="획득 도장 1개">
+                    <span class="earned"></span><span></span><span></span><span></span><span></span>
+                    <b>1/5</b>
+                  </div>
+                </div>
+                <button class="next-card next-action" id="stampNextButton" type="button">
+                  <span aria-hidden="true">♟</span>
+                  <p>총 5개의 도장을 모아 랭킹을 달성하세요.</p>
+                </button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-nine" data-stage="9">
+            <div class="stage-label">
+              <span class="stage-number">9</span>
+              <strong>다른 키링 구매</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="shop-panel" aria-labelledby="shop-title">
+                <div class="coupon-strip" aria-label="할인 쿠폰">
+                  <span aria-hidden="true">▣</span>
+                  <p>도장 1개 이상 보유자 한정</p>
+                </div>
+                <h1 id="shop-title">다른 키링 <strong>40%</strong> 할인</h1>
+                <div class="shop-visual" aria-hidden="true">
+                  <span class="mini-keyring">
+                    <span class="mini-person"></span>
+                    <span class="mini-mask"></span>
+                  </span>
+                  <span class="discount-badge">다른 키링<br />40% 할인</span>
+                </div>
+                <p class="shop-copy">새로운 키링을 구매하고 NFC로 다시 태그해보세요!</p>
+                <button class="primary-action cart-action" id="purchaseNextButton" type="button">
+                  다른 키링 보러가기
+                </button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-ten" data-stage="10">
+            <div class="stage-label">
+              <span class="stage-number">10</span>
+              <strong>공유 후 최종 키워드 신청</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="share-panel" aria-labelledby="share-title">
+                <h1 id="share-title">5개의 도장을 모두 모았다면<br />공유를 완료한 뒤<br />최종 키워드를 신청하세요!</h1>
+                <div class="share-hero" aria-hidden="true">
+                  <span class="confetti"></span>
+                  <span class="share-symbol"></span>
+                </div>
+                <button class="primary-action share-action" id="shareButton" type="button">공유하기</button>
+                <div class="reward-grid">
+                  <div class="reward-item">
+                    <span class="reward-face"></span>
+                    <strong>자서전</strong>
+                  </div>
+                  <div class="reward-item">
+                    <span class="reward-pen"></span>
+                    <strong>최종노트</strong>
+                  </div>
+                </div>
+                <button class="keyword-action" id="keywordButton" type="button">최종 키워드 신청하기</button>
+                <p class="keyword-note" id="keywordNote">최종 키워드는 신청 후 변경할 수 없습니다.</p>
+              </section>
+            </div>
+          </article>
+        </div>
+
+        <nav class="flow-controls" aria-label="단계 제어">
+          <button class="previous-button" id="previousButton" type="button">이전</button>
+          <button class="restart-button" id="restartButton" type="button">처음부터</button>
+          <div class="step-dots" aria-hidden="true">
+            <span class="dot is-active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </nav>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
