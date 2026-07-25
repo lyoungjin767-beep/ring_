@@ -179,7 +179,7 @@
                   <p>인물 관련 내용 +<br />독립운동 전반 퀴즈가 출제됩니다.</p>
                 </div>
 
-                <button class="primary-action" id="guideNextButton" type="button">단계 선택하기</button>
+                <button class="primary-action" id="guideNextButton" type="button">퀴즈 시작 화면으로</button>
               </section>
             </div>
           </article>
@@ -187,7 +187,7 @@
           <article class="stage stage-five" data-stage="5">
             <div class="stage-label">
               <span class="stage-number">5</span>
-              <strong>단계 선택</strong>
+              <strong>퀴즈 시작</strong>
             </div>
             <div class="phone-screen">
               <header class="phone-header">
@@ -198,13 +198,14 @@
               </header>
 
               <section class="level-panel" aria-labelledby="level-title">
-                <h1 id="level-title">풀고 싶은 단계를 선택하세요.</h1>
-                <div class="level-choice-grid" aria-label="단계 선택">
-                  <button class="level-choice is-selected" type="button" data-level="1">1단계</button>
-                  <button class="level-choice" type="button" data-level="2">2단계</button>
-                  <button class="level-choice" type="button" data-level="3">3단계</button>
-                  <button class="level-choice" type="button" data-level="4">4단계</button>
-                  <button class="level-choice" type="button" data-level="5">5단계</button>
+                <h1 id="level-title">1단계부터 시작합니다!</h1>
+                <p class="level-start-copy">각 단계는 5문제씩 진행되고, 5단계까지 순서대로 이어집니다.</p>
+                <div class="level-flow-grid" aria-label="퀴즈 진행 단계">
+                  <span class="level-chip is-active">1단계</span>
+                  <span class="level-chip">2단계</span>
+                  <span class="level-chip">3단계</span>
+                  <span class="level-chip">4단계</span>
+                  <span class="level-chip">5단계</span>
                 </div>
 
                 <div class="stamp-board">
@@ -214,6 +215,7 @@
                     <b>0/5</b>
                   </div>
                 </div>
+                <button class="primary-action start-quiz-action" id="startQuizButton" type="button">1단계 시작하기</button>
               </section>
             </div>
           </article>
@@ -233,24 +235,19 @@
 
               <section class="play-panel" aria-labelledby="play-title">
                 <div class="quiz-progress">
-                  <span>1단계 / 5문제 중 1문제</span>
-                  <strong>1/5</strong>
+                  <span id="quizStageMeta">1단계 / 5문제 중 1문제</span>
+                  <strong id="quizStageCounter">1/5</strong>
                 </div>
                 <div class="progress-track" aria-hidden="true">
-                  <span></span>
+                  <span id="quizProgressBar"></span>
                 </div>
+                <p class="overall-counter" id="quizOverallCounter">전체 1/25</p>
 
                 <h1 id="play-title">윤동주의 대표작으로<br />옳은 것은?</h1>
-                <div class="play-answer-grid" id="quizAnswerGrid">
-                  <button class="quiz-answer-choice" type="button" data-correct="true">
-                    하늘과 바람과 별과 시
-                  </button>
-                  <button class="quiz-answer-choice" type="button">별 헤는 밤</button>
-                  <button class="quiz-answer-choice" type="button">서시</button>
-                  <button class="quiz-answer-choice" type="button">진달래꽃</button>
-                </div>
+                <div class="play-answer-grid" id="quizAnswerGrid"></div>
 
-                <p class="quiz-feedback" id="quizFeedback">인물 관련 질문과 독립운동 전반에 대한 질문이 출제됩니다.</p>
+                <p class="quiz-feedback" id="quizFeedback">정답을 선택하면 해설이 표시됩니다.</p>
+                <button class="primary-action quiz-next-action" id="nextQuizButton" type="button" hidden>다음 문제</button>
               </section>
             </div>
           </article>
@@ -269,18 +266,18 @@
               </header>
 
               <section class="explain-panel" aria-labelledby="explain-title">
-                <h1 id="explain-title">정답입니다!</h1>
+                <h1 id="explain-title">25문제를 모두 풀었습니다!</h1>
                 <div class="red-portrait" aria-label="윤동주 초상">
                   <img src="assets/yoon-dongju.png" alt="" />
                 </div>
                 <div class="explain-box">
-                  <strong>해설</strong>
+                  <strong>마무리 해설</strong>
                   <p>
-                    윤동주는 <strong>하늘과 바람과 별과 시</strong>에 실린 다양한 작품을 통해
-                    일제강점기의 아픔과 민족의식을 노래했습니다.
+                    윤동주와 무장 독립운동, 신민회까지 5단계 핵심 문제를 완료했습니다.
+                    이제 획득한 도장을 확인하세요.
                   </p>
                 </div>
-                <button class="primary-action" id="explainNextButton" type="button">다음 문제</button>
+                <button class="primary-action" id="explainNextButton" type="button">도장 확인하기</button>
               </section>
             </div>
           </article>
