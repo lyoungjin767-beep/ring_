@@ -8,6 +8,12 @@ const scanStatus = document.querySelector("#scanStatus");
 const scanTitle = scanStatus.querySelector("strong");
 const scanText = scanStatus.querySelector("span:last-child");
 const answerChoices = [...document.querySelectorAll(".answer-choice")];
+const nextToQuizGuide = document.querySelector("#nextToQuizGuide");
+const guideNextButton = document.querySelector("#guideNextButton");
+const levelChoices = [...document.querySelectorAll(".level-choice")];
+const quizAnswerGrid = document.querySelector("#quizAnswerGrid");
+const quizAnswerChoices = [...document.querySelectorAll(".quiz-answer-choice")];
+const quizFeedback = document.querySelector("#quizFeedback");
 
 let tagTimer;
 let quizResolved = false;
@@ -38,6 +44,19 @@ function resetChoices() {
     button.classList.remove("is-selected", "is-correct", "is-wrong", "is-auto");
     button.disabled = false;
   });
+
+  levelChoices.forEach((button, index) => {
+    button.classList.toggle("is-selected", index === 0);
+    button.disabled = false;
+  });
+
+  quizAnswerChoices.forEach((button) => {
+    button.classList.remove("is-selected", "is-correct", "is-wrong");
+    button.disabled = false;
+  });
+
+  quizFeedback.textContent = "인물 관련 질문과 독립운동 전반에 대한 질문이 출제됩니다.";
+  quizFeedback.classList.remove("is-success");
 }
 
 function resetFlow() {
@@ -91,6 +110,8 @@ function revealAnswer(button) {
 
 tagButton.addEventListener("click", startTagFlow);
 restartButton.addEventListener("click", resetFlow);
+nextToQuizGuide.addEventListener("click", () => setStep(4));
+guideNextButton.addEventListener("click", () => setStep(5));
 
 answerGrid.addEventListener("click", (event) => {
   const button = event.target.closest(".answer-choice");
@@ -98,6 +119,37 @@ answerGrid.addEventListener("click", (event) => {
 
   if (button.dataset.correct === "true") {
     revealAnswer(button);
+    return;
+  }
+
+  button.classList.add("is-wrong");
+  window.setTimeout(() => {
+    button.classList.remove("is-wrong");
+  }, 420);
+});
+
+levelChoices.forEach((button) => {
+  button.addEventListener("click", () => {
+    levelChoices.forEach((choice) => choice.classList.remove("is-selected"));
+    button.classList.add("is-selected");
+
+    window.setTimeout(() => {
+      setStep(6);
+    }, 260);
+  });
+});
+
+quizAnswerGrid.addEventListener("click", (event) => {
+  const button = event.target.closest(".quiz-answer-choice");
+  if (!button || button.disabled) return;
+
+  if (button.dataset.correct === "true") {
+    quizAnswerChoices.forEach((choice) => {
+      choice.disabled = true;
+    });
+    button.classList.add("is-correct", "is-selected");
+    quizFeedback.textContent = "정답입니다. 윤동주의 대표 시집으로 기억해두세요.";
+    quizFeedback.classList.add("is-success");
     return;
   }
 

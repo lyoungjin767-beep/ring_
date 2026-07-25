@@ -129,10 +129,128 @@
                   민족 시인으로, 시집 <strong>하늘과 바람과 별과 시</strong>를 통해
                   저항과 성찰의 마음을 전했습니다.
                 </p>
-                <div class="next-card">
+                <button class="next-card next-action" id="nextToQuizGuide" type="button">
                   <span aria-hidden="true">★</span>
                   <p>다음으로 퀴즈를 풀어 독립운동에 참여해보세요!</p>
+                </button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-four" data-stage="4">
+            <div class="stage-label">
+              <span class="stage-number">4</span>
+              <strong>퀴즈 안내</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="guide-panel" aria-labelledby="guide-title">
+                <h1 id="guide-title">독립운동 기억 퀴즈</h1>
+                <div class="guide-list">
+                  <div class="guide-item">
+                    <span class="guide-icon list-icon" aria-hidden="true"></span>
+                    <strong>총 5단계</strong>
+                  </div>
+                  <div class="guide-item">
+                    <span class="guide-icon checklist-icon" aria-hidden="true"></span>
+                    <strong>1단계당 5문제</strong>
+                  </div>
+                  <div class="guide-item">
+                    <span class="guide-icon stamp-icon" aria-hidden="true"></span>
+                    <strong>총 25문제 완료 시<br />도장 1개 획득</strong>
+                  </div>
                 </div>
+
+                <div class="level-preview" aria-label="퀴즈 단계">
+                  <span>1단계</span>
+                  <span>2단계</span>
+                  <span>3단계</span>
+                  <span>4단계</span>
+                  <span>5단계</span>
+                </div>
+
+                <div class="quiz-note">
+                  <p>인물 관련 내용 +<br />독립운동 전반 퀴즈가 출제됩니다.</p>
+                </div>
+
+                <button class="primary-action" id="guideNextButton" type="button">단계 선택하기</button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-five" data-stage="5">
+            <div class="stage-label">
+              <span class="stage-number">5</span>
+              <strong>단계 선택</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="level-panel" aria-labelledby="level-title">
+                <h1 id="level-title">풀고 싶은 단계를 선택하세요.</h1>
+                <div class="level-choice-grid" aria-label="단계 선택">
+                  <button class="level-choice is-selected" type="button" data-level="1">1단계</button>
+                  <button class="level-choice" type="button" data-level="2">2단계</button>
+                  <button class="level-choice" type="button" data-level="3">3단계</button>
+                  <button class="level-choice" type="button" data-level="4">4단계</button>
+                  <button class="level-choice" type="button" data-level="5">5단계</button>
+                </div>
+
+                <div class="stamp-board">
+                  <strong>내 도장 현황</strong>
+                  <div class="stamp-row" aria-label="획득 도장 0개">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <b>0/5</b>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-six" data-stage="6">
+            <div class="stage-label">
+              <span class="stage-number">6</span>
+              <strong>퀴즈 풀기</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="play-panel" aria-labelledby="play-title">
+                <div class="quiz-progress">
+                  <span>1단계 / 5문제 중 1문제</span>
+                  <strong>1/5</strong>
+                </div>
+                <div class="progress-track" aria-hidden="true">
+                  <span></span>
+                </div>
+
+                <h1 id="play-title">윤동주의 대표작으로<br />옳은 것은?</h1>
+                <div class="play-answer-grid" id="quizAnswerGrid">
+                  <button class="quiz-answer-choice" type="button" data-correct="true">
+                    하늘과 바람과 별과 시
+                  </button>
+                  <button class="quiz-answer-choice" type="button">별 헤는 밤</button>
+                  <button class="quiz-answer-choice" type="button">서시</button>
+                  <button class="quiz-answer-choice" type="button">진달래꽃</button>
+                </div>
+
+                <p class="quiz-feedback" id="quizFeedback">인물 관련 질문과 독립운동 전반에 대한 질문이 출제됩니다.</p>
               </section>
             </div>
           </article>
@@ -142,6 +260,9 @@
           <button class="restart-button" id="restartButton" type="button">처음부터</button>
           <div class="step-dots" aria-hidden="true">
             <span class="dot is-active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
           </div>
