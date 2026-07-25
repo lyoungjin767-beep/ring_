@@ -45,24 +45,6 @@ button {
   width: min(430px, 100%);
 }
 
-.title-pill {
-  width: fit-content;
-  margin: 0 auto clamp(18px, 3vw, 30px);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 13px 28px 14px;
-  color: #fff9ed;
-  background: #2d241c;
-  border-radius: 8px;
-  box-shadow: 0 10px 22px rgba(45, 36, 28, 0.22);
-  letter-spacing: 0;
-}
-
-.title-pill strong {
-  font-size: clamp(18px, 2.5vw, 24px);
-}
-
 .flow-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -790,19 +772,8 @@ button {
     padding: 14px;
   }
 
-  .title-pill {
-    width: 100%;
-    justify-content: center;
-    padding-inline: 12px;
-    gap: 10px;
-  }
-
-  .title-pill strong {
-    font-size: 17px;
-  }
-
   .phone-screen {
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 120px);
     padding-inline: 12px;
   }
 
