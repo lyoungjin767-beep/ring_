@@ -379,6 +379,7 @@ button {
 }
 
 .nfc-select-card:focus-visible,
+.back-button:focus-visible,
 .restart-button:focus-visible,
 .answer-choice:focus-visible,
 .next-action:focus-visible,
@@ -1537,18 +1538,35 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
+.back-button,
 .restart-button {
   min-height: 42px;
   padding: 0 18px;
   border: 1px solid rgba(45, 36, 28, 0.28);
   border-radius: 8px;
-  color: #fffaf1;
-  background: #2d241c;
   cursor: pointer;
   font-weight: 800;
+}
+
+.back-button {
+  color: #2d241c;
+  background: #fff7e7;
+}
+
+.restart-button {
+  color: #fffaf1;
+  background: #2d241c;
+}
+
+.back-button:disabled {
+  color: #9b8c7b;
+  background: #eee3d4;
+  cursor: default;
+  opacity: 0.72;
 }
 
 .step-dots {

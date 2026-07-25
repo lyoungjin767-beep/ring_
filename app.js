@@ -246,6 +246,7 @@ const app = document.querySelector(".app");
 const stages = [...document.querySelectorAll(".stage")];
 const dots = [...document.querySelectorAll(".dot")];
 const tagButtons = [...document.querySelectorAll(".nfc-select-card")];
+const previousButton = document.querySelector("#previousButton");
 const restartButton = document.querySelector("#restartButton");
 const answerGrid = document.querySelector("#answerGrid");
 const scanStatus = document.querySelector("#scanStatus");
@@ -301,6 +302,8 @@ function setStep(step) {
     dot.classList.toggle("is-active", index + 1 === step);
     dot.classList.toggle("is-complete", index + 1 < step);
   });
+
+  previousButton.disabled = step <= 1;
 }
 
 function renderQuizQuestion() {
@@ -453,7 +456,25 @@ function showNextQuizQuestion() {
   renderQuizQuestion();
 }
 
+function goToPreviousStep() {
+  const currentStep = Number(app.dataset.step) || 1;
+  const previousStep = Math.max(1, currentStep - 1);
+
+  if (previousStep === currentStep) return;
+
+  clearTagTimer();
+  app.dataset.reading = "false";
+
+  if (previousStep === 2) {
+    quizResolved = false;
+    renderIntroQuiz(selectedNfcName);
+  }
+
+  setStep(previousStep);
+}
+
 tagButtons.forEach((button) => button.addEventListener("click", startTagFlow));
+previousButton.addEventListener("click", goToPreviousStep);
 restartButton.addEventListener("click", resetFlow);
 nextToQuizGuide.addEventListener("click", () => setStep(4));
 guideNextButton.addEventListener("click", () => setStep(5));
