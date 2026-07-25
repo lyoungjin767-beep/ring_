@@ -14,6 +14,12 @@ const levelChoices = [...document.querySelectorAll(".level-choice")];
 const quizAnswerGrid = document.querySelector("#quizAnswerGrid");
 const quizAnswerChoices = [...document.querySelectorAll(".quiz-answer-choice")];
 const quizFeedback = document.querySelector("#quizFeedback");
+const explainNextButton = document.querySelector("#explainNextButton");
+const stampNextButton = document.querySelector("#stampNextButton");
+const purchaseNextButton = document.querySelector("#purchaseNextButton");
+const shareButton = document.querySelector("#shareButton");
+const keywordButton = document.querySelector("#keywordButton");
+const keywordNote = document.querySelector("#keywordNote");
 
 let tagTimer;
 let quizResolved = false;
@@ -57,6 +63,9 @@ function resetChoices() {
 
   quizFeedback.textContent = "인물 관련 질문과 독립운동 전반에 대한 질문이 출제됩니다.";
   quizFeedback.classList.remove("is-success");
+  shareButton.textContent = "공유하기";
+  keywordButton.textContent = "최종 키워드 신청하기";
+  keywordNote.textContent = "최종 키워드는 신청 후 변경할 수 없습니다.";
 }
 
 function resetFlow() {
@@ -112,6 +121,9 @@ tagButton.addEventListener("click", startTagFlow);
 restartButton.addEventListener("click", resetFlow);
 nextToQuizGuide.addEventListener("click", () => setStep(4));
 guideNextButton.addEventListener("click", () => setStep(5));
+explainNextButton.addEventListener("click", () => setStep(8));
+stampNextButton.addEventListener("click", () => setStep(9));
+purchaseNextButton.addEventListener("click", () => setStep(10));
 
 answerGrid.addEventListener("click", (event) => {
   const button = event.target.closest(".answer-choice");
@@ -150,6 +162,9 @@ quizAnswerGrid.addEventListener("click", (event) => {
     button.classList.add("is-correct", "is-selected");
     quizFeedback.textContent = "정답입니다. 윤동주의 대표 시집으로 기억해두세요.";
     quizFeedback.classList.add("is-success");
+    window.setTimeout(() => {
+      setStep(7);
+    }, 720);
     return;
   }
 
@@ -157,6 +172,15 @@ quizAnswerGrid.addEventListener("click", (event) => {
   window.setTimeout(() => {
     button.classList.remove("is-wrong");
   }, 420);
+});
+
+shareButton.addEventListener("click", () => {
+  shareButton.textContent = "공유 완료";
+});
+
+keywordButton.addEventListener("click", () => {
+  keywordButton.textContent = "신청 완료";
+  keywordNote.textContent = "최종 키워드 신청이 완료되었습니다.";
 });
 
 resetFlow();

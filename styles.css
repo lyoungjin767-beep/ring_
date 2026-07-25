@@ -161,7 +161,8 @@ button {
 .next-action:focus-visible,
 .primary-action:focus-visible,
 .level-choice:focus-visible,
-.quiz-answer-choice:focus-visible {
+.quiz-answer-choice:focus-visible,
+.keyword-action:focus-visible {
   outline: 3px solid rgba(41, 111, 104, 0.45);
   outline-offset: 3px;
 }
@@ -408,7 +409,11 @@ button {
 .answer-panel,
 .guide-panel,
 .level-panel,
-.play-panel {
+.play-panel,
+.explain-panel,
+.stamp-panel,
+.shop-panel,
+.share-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -418,7 +423,11 @@ button {
 .answer-panel h1,
 .guide-panel h1,
 .level-panel h1,
-.play-panel h1 {
+.play-panel h1,
+.explain-panel h1,
+.stamp-panel h1,
+.shop-panel h1,
+.share-panel h1 {
   margin: 12px 0 18px;
   text-align: center;
   font-size: 20px;
@@ -888,6 +897,328 @@ button {
   color: #155b51;
   border-color: rgba(41, 111, 104, 0.35);
   background: #eef8f3;
+}
+
+.red-portrait,
+.stamp-medal {
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 5px solid #cc342b;
+  border-radius: 50%;
+  background: #fff7f0;
+  box-shadow: 0 8px 18px rgba(121, 40, 32, 0.14);
+}
+
+.red-portrait img,
+.stamp-medal img {
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  object-position: center top;
+  filter: sepia(0.45) saturate(1.6) hue-rotate(320deg) contrast(1.05);
+  opacity: 0.95;
+}
+
+.explain-box {
+  width: 100%;
+  margin: 22px 0 18px;
+  padding: 16px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff7e7;
+}
+
+.explain-box strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.explain-box p {
+  margin: 0;
+  color: #3f352b;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.stamp-panel h1 {
+  font-size: 15px;
+}
+
+.stamp-medal {
+  margin: 8px 0 18px;
+}
+
+.stamp-board.is-earned {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.stamp-row .earned {
+  position: relative;
+  border-color: #d64239;
+  background: #d64239;
+}
+
+.stamp-row .earned::before {
+  content: "★";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 12px;
+}
+
+.coupon-strip {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff7e7;
+}
+
+.coupon-strip p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.shop-panel h1 strong {
+  color: #d3352c;
+  font-size: 28px;
+}
+
+.shop-visual {
+  position: relative;
+  width: 220px;
+  height: 230px;
+  margin: 8px 0 10px;
+}
+
+.mini-keyring {
+  position: absolute;
+  left: 20px;
+  bottom: 4px;
+  width: 128px;
+  height: 190px;
+}
+
+.mini-keyring::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 42px;
+  width: 48px;
+  height: 48px;
+  border: 7px solid #1c1916;
+  border-radius: 50%;
+  transform: rotateX(55deg) rotateZ(-18deg);
+}
+
+.mini-person {
+  position: absolute;
+  left: 4px;
+  bottom: 0;
+  width: 72px;
+  height: 132px;
+  border-radius: 34px 34px 10px 10px;
+  background:
+    radial-gradient(circle at 50% 25%, #edc59e 0 18px, transparent 19px),
+    radial-gradient(circle at 50% 9%, #1f1a16 0 26px, transparent 27px),
+    linear-gradient(90deg, #191715 0 44%, #fff 44% 56%, #2a2521 56%);
+  border: 3px solid #191512;
+}
+
+.mini-mask {
+  position: absolute;
+  right: 4px;
+  bottom: 36px;
+  width: 62px;
+  height: 62px;
+  border: 3px solid #191512;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 22px 26px, #191512 0 4px, transparent 5px),
+    radial-gradient(circle at 40px 26px, #191512 0 4px, transparent 5px),
+    #fff;
+}
+
+.discount-badge {
+  position: absolute;
+  right: 4px;
+  top: 42px;
+  width: 90px;
+  height: 90px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
+  background: #d3352c;
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 900;
+  clip-path: polygon(
+    50% 0,
+    61% 18%,
+    82% 10%,
+    80% 32%,
+    100% 43%,
+    82% 56%,
+    90% 78%,
+    66% 76%,
+    50% 100%,
+    35% 76%,
+    10% 78%,
+    18% 56%,
+    0 43%,
+    20% 32%,
+    18% 10%,
+    39% 18%
+  );
+}
+
+.shop-copy {
+  margin: 0 0 12px;
+  text-align: center;
+  color: #3f352b;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.share-panel h1 {
+  font-size: 15px;
+}
+
+.share-hero {
+  width: 128px;
+  height: 128px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  margin: 2px 0 16px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 28px 24px, #f15b50 0 3px, transparent 4px),
+    radial-gradient(circle at 92px 22px, #4a96f0 0 3px, transparent 4px),
+    radial-gradient(circle at 22px 88px, #f0b545 0 3px, transparent 4px),
+    radial-gradient(circle at 106px 92px, #296f68 0 3px, transparent 4px),
+    #fffdf8;
+}
+
+.share-symbol {
+  width: 58px;
+  height: 70px;
+  display: block;
+  position: relative;
+  border: 4px solid #bfa46d;
+  border-radius: 6px;
+  background: #eef8f3;
+}
+
+.share-symbol::before,
+.share-symbol::after {
+  content: "";
+  position: absolute;
+  background: #2ca35c;
+}
+
+.share-symbol::before {
+  top: 20px;
+  left: 18px;
+  width: 23px;
+  height: 4px;
+  transform: rotate(-28deg);
+  box-shadow: 9px 18px 0 #2ca35c;
+}
+
+.share-symbol::after {
+  top: 12px;
+  left: 12px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 28px -11px 0 #2ca35c, 34px 28px 0 #2ca35c;
+}
+
+.share-action {
+  margin-bottom: 14px;
+}
+
+.reward-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.reward-item {
+  min-height: 98px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.reward-item strong {
+  font-size: 13px;
+}
+
+.reward-face {
+  width: 54px;
+  height: 54px;
+  display: block;
+  border: 3px solid #191512;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 18px 23px, #191512 0 4px, transparent 5px),
+    radial-gradient(circle at 36px 23px, #191512 0 4px, transparent 5px),
+    radial-gradient(circle at 50% 36px, #d9493d 0 7px, transparent 8px),
+    #fff;
+}
+
+.reward-pen {
+  width: 16px;
+  height: 62px;
+  display: block;
+  border-radius: 9px;
+  background: linear-gradient(#5b311f 0 72%, #14100d 72% 86%, #c8ad79 86%);
+  transform: rotate(35deg);
+  box-shadow: 8px 4px 0 rgba(48, 38, 30, 0.14);
+}
+
+.keyword-action {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: #2e2721;
+  background: #fff6e4;
+  cursor: pointer;
+  font-weight: 900;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.keyword-action:hover {
+  transform: translateY(-2px);
+  background: #fff0d4;
+}
+
+.keyword-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 11px;
 }
 
 .flow-arrow {

@@ -254,12 +254,149 @@
               </section>
             </div>
           </article>
+
+          <article class="stage stage-seven" data-stage="7">
+            <div class="stage-label">
+              <span class="stage-number">7</span>
+              <strong>정답 &amp; 해설</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="explain-panel" aria-labelledby="explain-title">
+                <h1 id="explain-title">정답입니다!</h1>
+                <div class="red-portrait" aria-label="윤동주 초상">
+                  <img src="assets/yoon-dongju.png" alt="" />
+                </div>
+                <div class="explain-box">
+                  <strong>해설</strong>
+                  <p>
+                    윤동주는 <strong>하늘과 바람과 별과 시</strong>에 실린 다양한 작품을 통해
+                    일제강점기의 아픔과 민족의식을 노래했습니다.
+                  </p>
+                </div>
+                <button class="primary-action" id="explainNextButton" type="button">다음 문제</button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-eight" data-stage="8">
+            <div class="stage-label">
+              <span class="stage-number">8</span>
+              <strong>도장 획득</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="stamp-panel" aria-labelledby="stamp-title">
+                <h1 id="stamp-title">25문제를 모두 완료했어요!<br />도장 1개를 획득했습니다.</h1>
+                <div class="stamp-medal" aria-hidden="true">
+                  <img src="assets/yoon-dongju.png" alt="" />
+                </div>
+                <div class="stamp-board is-earned">
+                  <strong>내 도장 현황</strong>
+                  <div class="stamp-row" aria-label="획득 도장 1개">
+                    <span class="earned"></span><span></span><span></span><span></span><span></span>
+                    <b>1/5</b>
+                  </div>
+                </div>
+                <button class="next-card next-action" id="stampNextButton" type="button">
+                  <span aria-hidden="true">♟</span>
+                  <p>총 5개의 도장을 모아 랭킹을 달성하세요.</p>
+                </button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-nine" data-stage="9">
+            <div class="stage-label">
+              <span class="stage-number">9</span>
+              <strong>다른 키링 구매</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="shop-panel" aria-labelledby="shop-title">
+                <div class="coupon-strip" aria-label="할인 쿠폰">
+                  <span aria-hidden="true">▣</span>
+                  <p>도장 1개 이상 보유자 한정</p>
+                </div>
+                <h1 id="shop-title">다른 키링 <strong>40%</strong> 할인</h1>
+                <div class="shop-visual" aria-hidden="true">
+                  <span class="mini-keyring">
+                    <span class="mini-person"></span>
+                    <span class="mini-mask"></span>
+                  </span>
+                  <span class="discount-badge">다른 키링<br />40% 할인</span>
+                </div>
+                <p class="shop-copy">새로운 키링을 구매하고 NFC로 다시 태그해보세요!</p>
+                <button class="primary-action cart-action" id="purchaseNextButton" type="button">
+                  다른 키링 보러가기
+                </button>
+              </section>
+            </div>
+          </article>
+
+          <article class="stage stage-ten" data-stage="10">
+            <div class="stage-label">
+              <span class="stage-number">10</span>
+              <strong>공유 후 최종 키워드 신청</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="share-panel" aria-labelledby="share-title">
+                <h1 id="share-title">5개의 도장을 모두 모았다면<br />공유를 완료한 뒤<br />최종 키워드를 신청하세요!</h1>
+                <div class="share-hero" aria-hidden="true">
+                  <span class="confetti"></span>
+                  <span class="share-symbol"></span>
+                </div>
+                <button class="primary-action share-action" id="shareButton" type="button">공유하기</button>
+                <div class="reward-grid">
+                  <div class="reward-item">
+                    <span class="reward-face"></span>
+                    <strong>자서전</strong>
+                  </div>
+                  <div class="reward-item">
+                    <span class="reward-pen"></span>
+                    <strong>최종노트</strong>
+                  </div>
+                </div>
+                <button class="keyword-action" id="keywordButton" type="button">최종 키워드 신청하기</button>
+                <p class="keyword-note" id="keywordNote">최종 키워드는 신청 후 변경할 수 없습니다.</p>
+              </section>
+            </div>
+          </article>
         </div>
 
         <nav class="flow-controls" aria-label="단계 제어">
           <button class="restart-button" id="restartButton" type="button">처음부터</button>
           <div class="step-dots" aria-hidden="true">
             <span class="dot is-active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
