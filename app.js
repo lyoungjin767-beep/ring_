@@ -924,6 +924,10 @@ const introProfiles = {
     role: "의병장, 독립운동가",
     date: "1879.9.2 - 1910.3.26",
     bio: "하얼빈 의거와 동양평화론으로 독립과 평화의 뜻을 남겼습니다.",
+    image: {
+      src: "assets/ahn-jung-geun.jpg",
+      alt: "안중근 사진",
+    },
   },
 };
 const defaultIntroProfile = introProfiles["윤동주"];
