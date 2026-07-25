@@ -790,6 +790,30 @@ button {
   box-shadow: inset 0 0 0 1px #d5d1cb;
 }
 
+.yoon-card[hidden],
+.answer-symbol[hidden] {
+  display: none;
+}
+
+.answer-symbol {
+  width: 142px;
+  height: 148px;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: #241d17;
+  background:
+    radial-gradient(circle at 50% 35%, #1f1a16 0 24px, transparent 25px),
+    radial-gradient(circle at 50% 72%, #34261e 0 38px, transparent 39px),
+    linear-gradient(150deg, #fff7e7, #eaf4ef);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+  font-size: 17px;
+  font-weight: 900;
+  text-align: center;
+}
+
 .answer-panel h2 {
   margin: 12px 0 2px;
   font-size: 15px;

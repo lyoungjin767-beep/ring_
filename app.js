@@ -195,6 +195,53 @@ const quizQuestions = [
 ];
 
 const choiceMarkers = ["①", "②", "③", "④", "⑤"];
+const introProfiles = {
+  윤동주: {
+    answer: "윤동주",
+    choices: ["윤동주", "윤봉길", "유관순", "안중근"],
+    hints: ["힌트 1: 시인입니다", "힌트 2: 대표작에 별 헤는 밤이 있습니다", "힌트 3: 일제강점기 민족의식을 노래했습니다"],
+    role: "시인, 독립운동가",
+    date: "1917.12.30 - 1945.2.16",
+    bio: "민족 시인으로, 시집 하늘과 바람과 별과 시를 통해 저항과 성찰의 마음을 전했습니다.",
+    image: {
+      src: "assets/yoon-dongju.png",
+      alt: "윤동주 흑백 사진",
+    },
+  },
+  김구: {
+    answer: "김구",
+    choices: ["윤동주", "김구", "유관순", "안중근"],
+    hints: ["힌트 1: 대한민국 임시정부에서 활동했습니다", "힌트 2: 한인애국단을 조직했습니다", "힌트 3: 백범일지를 남겼습니다"],
+    role: "대한민국 임시정부 주석, 독립운동가",
+    date: "1876.8.29 - 1949.6.26",
+    bio: "임시정부 활동과 한인애국단 조직으로 독립운동의 중심을 이끌었습니다.",
+  },
+  유관순: {
+    answer: "유관순",
+    choices: ["윤동주", "윤봉길", "유관순", "안중근"],
+    hints: ["힌트 1: 3.1 운동의 상징적 인물입니다", "힌트 2: 아우내 장터 만세운동을 주도했습니다", "힌트 3: 서대문형무소에서 옥중 순국했습니다"],
+    role: "3.1운동 독립운동가",
+    date: "1902.12.16 - 1920.9.28",
+    bio: "아우내 장터 만세운동을 주도하고 옥중에서도 독립 의지를 지켰습니다.",
+  },
+  윤봉길: {
+    answer: "윤봉길",
+    choices: ["윤동주", "윤봉길", "유관순", "안중근"],
+    hints: ["힌트 1: 한인애국단 소속 독립운동가입니다", "힌트 2: 상하이 홍커우 공원에서 의거를 일으켰습니다", "힌트 3: 물통 폭탄과 도시락 폭탄으로 알려져 있습니다"],
+    role: "한인애국단 독립운동가",
+    date: "1908.6.21 - 1932.12.19",
+    bio: "상하이 홍커우 공원 의거로 일제 침략의 부당함을 세계에 알렸습니다.",
+  },
+  안중근: {
+    answer: "안중근",
+    choices: ["윤동주", "윤봉길", "유관순", "안중근"],
+    hints: ["힌트 1: 하얼빈역에서 의거를 일으켰습니다", "힌트 2: 이토 히로부미를 처단했습니다", "힌트 3: 동양평화론을 남겼습니다"],
+    role: "의병장, 독립운동가",
+    date: "1879.9.2 - 1910.3.26",
+    bio: "하얼빈 의거와 동양평화론으로 독립과 평화의 뜻을 남겼습니다.",
+  },
+};
+const defaultIntroProfile = introProfiles["윤동주"];
 const app = document.querySelector(".app");
 const stages = [...document.querySelectorAll(".stage")];
 const dots = [...document.querySelectorAll(".dot")];
@@ -204,7 +251,14 @@ const answerGrid = document.querySelector("#answerGrid");
 const scanStatus = document.querySelector("#scanStatus");
 const scanTitle = scanStatus.querySelector("strong");
 const scanText = scanStatus.querySelector("span:last-child");
+const introHintTexts = [...document.querySelectorAll(".hint-list .hint p")];
 const answerChoices = [...document.querySelectorAll(".answer-choice")];
+const answerTitle = document.querySelector("#answer-title");
+const answerImage = document.querySelector("#answerImage");
+const answerSymbol = document.querySelector("#answerSymbol");
+const answerRole = document.querySelector("#answerRole");
+const answerDate = document.querySelector("#answerDate");
+const answerBio = document.querySelector("#answerBio");
 const nextToQuizGuide = document.querySelector("#nextToQuizGuide");
 const guideNextButton = document.querySelector("#guideNextButton");
 const startQuizButton = document.querySelector("#startQuizButton");
@@ -274,12 +328,46 @@ function renderQuizQuestion() {
   });
 }
 
-function resetChoices() {
+function getIntroProfile(personName) {
+  return introProfiles[personName] || defaultIntroProfile;
+}
+
+function renderIntroQuiz(personName) {
+  const profile = getIntroProfile(personName);
+
   answerChoices.forEach((button) => {
     button.classList.remove("is-selected", "is-correct", "is-wrong", "is-auto");
     button.disabled = false;
   });
 
+  introHintTexts.forEach((hint, index) => {
+    hint.textContent = profile.hints[index] || "";
+  });
+
+  answerChoices.forEach((button, index) => {
+    const choice = profile.choices[index] || "";
+    button.textContent = choice;
+    button.dataset.correct = String(choice === profile.answer);
+    button.hidden = !choice;
+  });
+
+  answerTitle.innerHTML = `이 인물은 바로<br />${profile.answer}입니다!`;
+  answerRole.textContent = profile.role;
+  answerDate.textContent = profile.date;
+  answerBio.textContent = profile.bio;
+
+  answerImage.hidden = !profile.image;
+  answerSymbol.hidden = Boolean(profile.image);
+  answerSymbol.textContent = profile.answer;
+
+  if (profile.image) {
+    answerImage.src = profile.image.src;
+    answerImage.alt = profile.image.alt;
+  }
+}
+
+function resetChoices() {
+  renderIntroQuiz(selectedNfcName);
   currentQuestionIndex = 0;
   renderQuizQuestion();
   shareButton.textContent = "공유하기";
@@ -307,6 +395,7 @@ function startTagFlow(event) {
 
   const selectedButton = event.currentTarget;
   selectedNfcName = selectedButton.dataset.person || "선택한 인물";
+  renderIntroQuiz(selectedNfcName);
 
   clearTagTimer();
   app.dataset.reading = "true";
