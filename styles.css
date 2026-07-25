@@ -42,7 +42,7 @@ button {
 }
 
 .flow-board {
-  width: min(1180px, 100%);
+  width: min(430px, 100%);
 }
 
 .title-pill {
@@ -65,24 +65,22 @@ button {
 
 .flow-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) 42px minmax(260px, 1fr) 42px minmax(260px, 1fr);
-  align-items: center;
-  gap: clamp(10px, 1.4vw, 18px);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
 }
 
 .stage {
   position: relative;
-  opacity: 0.64;
-  transform: translateY(10px) scale(0.985);
-  transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
-  filter: saturate(0.74);
+  display: none;
+  opacity: 0;
+  transform: translateX(18px);
 }
 
-.stage.is-active,
-.stage.is-complete {
+.stage.is-active {
+  display: block;
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: saturate(1);
+  transform: translateX(0);
+  animation: stageEnter 260ms ease both;
 }
 
 .stage.is-active .phone-screen {
@@ -120,7 +118,7 @@ button {
 }
 
 .phone-screen {
-  min-height: 560px;
+  min-height: 590px;
   padding: 70px 16px 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -679,17 +677,7 @@ button {
 }
 
 .flow-arrow {
-  font-size: clamp(46px, 5vw, 70px);
-  line-height: 1;
-  color: #9b9993;
-  transition: color 240ms ease, transform 240ms ease;
-}
-
-.app[data-step="2"] .arrow-one,
-.app[data-step="3"] .arrow-one,
-.app[data-step="3"] .arrow-two {
-  color: var(--teal);
-  transform: translateX(3px);
+  display: none;
 }
 
 .flow-controls {
@@ -730,10 +718,8 @@ button {
   background: var(--teal);
 }
 
-.app[data-step="1"] .stage-one,
-.app[data-step="2"] .stage-two,
-.app[data-step="3"] .stage-three {
-  opacity: 1;
+.dot.is-complete {
+  background: var(--gold);
 }
 
 .app[data-reading="true"] .keyring-model {
@@ -777,22 +763,21 @@ button {
   }
 }
 
+@keyframes stageEnter {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @media (max-width: 980px) {
   .flow-grid {
-    grid-template-columns: minmax(260px, 360px);
-    justify-content: center;
-  }
-
-  .stage {
-    display: none;
-  }
-
-  .stage.is-active {
-    display: block;
-  }
-
-  .flow-arrow {
-    display: none;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .phone-screen {
