@@ -1109,6 +1109,30 @@ button {
   justify-self: end;
 }
 
+.stamp-map {
+  position: relative;
+  width: min(100%, 230px);
+  margin: 0 auto 14px;
+  line-height: 0;
+}
+
+.stamp-map-image {
+  width: 100%;
+  max-height: 315px;
+  display: block;
+  object-fit: contain;
+}
+
+.map-stamp {
+  position: absolute;
+  top: 32%;
+  left: 30.5%;
+  width: 25%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: drop-shadow(0 3px 4px rgba(77, 34, 24, 0.26));
+}
+
 .quiz-progress {
   width: 100%;
   display: flex;
