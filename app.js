@@ -194,6 +194,194 @@ const quizQuestions = [
   },
 ];
 
+const yunBonggilQuizQuestions = [
+  {
+    level: 1,
+    question: "윤봉길 의사가 중국으로 망명하기 전 농촌 계몽을 위해 조직한 단체는?",
+    choices: ["신민회", "월진회", "근우회", "조선어 학회", "조선 민립 대학 기성회"],
+    answer: 1,
+    explanation: "정답은 월진회입니다. 윤봉길 의사는 농촌 계몽과 문맹 퇴치를 위해 월진회를 조직했습니다.",
+  },
+  {
+    level: 1,
+    question: "윤봉길 의사가 농민들의 문맹 퇴치를 위해 저술한 교재는?",
+    choices: ["독사신론", "조선혁명선언", "농민독본", "한국통사", "유년필독"],
+    answer: 2,
+    explanation: "정답은 농민독본입니다. 농민 교육과 문맹 퇴치를 위해 저술한 교재입니다.",
+  },
+  {
+    level: 1,
+    question: "윤봉길 의사가 한인 애국단에 가입할 당시 사용한 이름은?",
+    choices: ["윤우의", "윤치호", "윤세주", "윤동주", "윤희순"],
+    answer: 0,
+    explanation: "정답은 윤우의입니다. 윤봉길 의사는 한인애국단 가입 당시 윤우의라는 이름을 사용했습니다.",
+  },
+  {
+    level: 1,
+    question: "윤봉길 의사의 훙커우 공원 의거로 중상을 입은 일본군 장성은?",
+    choices: ["미우라 고로", "시라카와 요시노리", "데라우치 마사타케", "미나미 지로", "하세가와 요시미치"],
+    answer: 1,
+    explanation: "정답은 시라카와 요시노리입니다. 훙커우 공원 의거로 중상을 입었습니다.",
+  },
+  {
+    level: 1,
+    question: "윤봉길 의사의 훙커우 공원 의거 이후 나타난 영향으로 가장 적절한 것은?",
+    choices: [
+      "대한민국 임시 정부가 충칭에서 처음 수립되었다.",
+      "중국 국민당 정부가 대한민국 임시 정부를 적극 지원하는 계기가 되었다.",
+      "조선 총독부가 문화 통치를 처음 시행하였다.",
+      "일제가 회사령을 폐지하였다.",
+      "한국광복군이 즉시 국내 진공 작전을 실시하였다.",
+    ],
+    answer: 1,
+    explanation: "정답은 중국 국민당 정부가 대한민국 임시 정부를 적극 지원하는 계기가 되었다입니다.",
+  },
+  {
+    level: 2,
+    question: "1926년 일제의 대표적 경제 수탈 기관인 동양척식주식회사와 식산은행에 폭탄을 던진 인물은 누구일까요?",
+    choices: ["나석주", "김상옥", "윤봉길", "이봉창"],
+    answer: 0,
+    explanation: "정답은 나석주입니다. 의열단원으로서 일제의 경제 수탈 심장부에 폭탄을 투척했습니다.",
+  },
+  {
+    level: 2,
+    question: "나석주 의사가 공격한 동양척식주식회사의 주된 수탈 행위는 무엇이었을까요?",
+    choices: ["동양 최대의 토지 수탈 및 소작료 수탈", "우리말 사용 금지", "강제 징용 지휘", "역사책 불태우기"],
+    answer: 0,
+    explanation: "정답은 동양 최대의 토지 수탈 및 소작료 수탈입니다. 빼앗은 토지를 관리하며 한국 농민들을 수탈했습니다.",
+  },
+  {
+    level: 2,
+    question: "나석주 의사가 중국에서 입학하여 군사 훈련을 받고 졸업한 대표적인 독립군 양성 학교는 어디일까요?",
+    choices: ["신흥무관학교", "대성학교", "오산학교", "배재학당"],
+    answer: 0,
+    explanation: "정답은 신흥무관학교입니다. 졸업 후 만주와 중국 본토에서 항일 투쟁에 나섰습니다.",
+  },
+  {
+    level: 2,
+    question: "나석주 의사가 대한민국 임시정부에서 맡았던 직책은 무엇일까요?",
+    choices: ["경무국 경호원", "총사령관", "외무총장", "의정원 의장"],
+    answer: 0,
+    explanation: "정답은 경무국 경호원입니다. 김구 선생 아래서 임시정부 경무국 경호원으로 활동했습니다.",
+  },
+  {
+    level: 2,
+    question: "나석주 의사가 동양척식주식회사에 투척한 폭탄이 불발되자 취한 연속 행동은 무엇일까요?",
+    choices: ["권총으로 식산은행과 동양척식주식회사 간부들을 사살함", "즉시 중국으로 도망침", "현장에서 항복함", "식민지 법원에 항의서를 제출함"],
+    answer: 0,
+    explanation: "정답은 권총으로 식산은행과 동양척식주식회사 간부들을 사살함입니다.",
+  },
+  {
+    level: 3,
+    question: "1927년 민족주의 계열과 사회주의 계열이 합작하여 결성한 일제강점기 최대 규모의 합법적 항일 단체는 무엇일까요?",
+    choices: ["신간회", "신민회", "독립협회", "진단학회"],
+    answer: 0,
+    explanation: "정답은 신간회입니다. 좌우 합작을 통해 결성된 국내 최대의 항일 민족 협동 전선입니다.",
+  },
+  {
+    level: 3,
+    question: "신간회의 자매 단체로, 여성의 권리 신장과 항일 투쟁을 위해 결성된 조직은 무엇일까요?",
+    choices: ["근우회", "정우회", "유관순열사회", "한국여성동맹"],
+    answer: 0,
+    explanation: "정답은 근우회입니다. 신간회와 연계하여 여성 운동과 독립운동을 펼친 단체입니다.",
+  },
+  {
+    level: 3,
+    question: "1929년 신간회가 진상조사단을 파견하고 민중대회를 기획하며 적극 지원한 운동은 무엇일까요?",
+    choices: ["광주 학생 항일 운동", "6·10 만세 운동", "물산장려운동", "민립대학 설립운동"],
+    answer: 0,
+    explanation: "정답은 광주 학생 항일 운동입니다. 광주에서 시작된 학생 운동이 전국으로 확산되도록 지원했습니다.",
+  },
+  {
+    level: 3,
+    question: "독립운동가들을 위해 법정에서 무료로 변호를 맡았던 가인 김병로 선생이 광복 후 맡은 초대 관직은 무엇일까요?",
+    choices: ["초대 대법원장", "초대 대통령", "초대 국무총리", "초대 국회의장"],
+    answer: 0,
+    explanation: "정답은 초대 대법원장입니다. 대한민국 사법부의 기틀을 다졌습니다.",
+  },
+  {
+    level: 3,
+    question: "신간회가 내걸었던 3대 강령에 포함되지 않는 내용은 무엇일까요?",
+    choices: ["민족의 단결을 도모함", "정치적·경제적 자각을 촉진함", "기회주의를 부인함", "일왕에게 충성을 다함"],
+    answer: 3,
+    explanation: "정답은 일왕에게 충성을 다함입니다. 신간회는 기회주의를 배격하고 민족의 단결과 자각을 도모했습니다.",
+  },
+  {
+    level: 4,
+    question: "1914년 연해주에서 이상설, 이동휘 등이 중심이 되어 결성한 최초의 무장 독립운동 정부 조직은 무엇일까요?",
+    choices: ["대한광복군정부", "대한민국 임시정부", "한성정부", "대한국민의회"],
+    answer: 0,
+    explanation: "정답은 대한광복군정부입니다. 연해주에 세워진 최초의 망명 정부 형태의 무장 독립운동 조직입니다.",
+  },
+  {
+    level: 4,
+    question: "1918년 러시아 하바롭스크에서 이동휘 등이 중심이 되어 만든 한국 최초의 사회주의 정당은 무엇일까요?",
+    choices: ["한인사회당", "조선공산당", "남조선노동당", "동로당"],
+    answer: 0,
+    explanation: "정답은 한인사회당입니다. 러시아 지역 한인 독립운동가들이 결성한 최초의 사회주의 정당입니다.",
+  },
+  {
+    level: 4,
+    question: "1919년 상하이 대한민국 임시정부가 발족할 때 초대 국무총리로 취임한 인물은 누구일까요?",
+    choices: ["이동휘", "이승만", "김구", "안창호"],
+    answer: 0,
+    explanation: "정답은 이동휘입니다. 무장 투쟁파의 대표격으로 임시정부의 초대 국무총리로 취임했습니다.",
+  },
+  {
+    level: 4,
+    question: "이동휘 등이 중심이 되어 함경도와 강화도 일대에서 민족 교육을 펼친 대표적인 학교는 어디일까요?",
+    choices: ["보창학교", "대성학교", "신흥학교", "배재학당"],
+    answer: 0,
+    explanation: "정답은 보창학교입니다. 이동휘 선생이 세워 인재를 양성하고 민족 의식을 심어준 학교입니다.",
+  },
+  {
+    level: 4,
+    question: "임시정부 초기 무장 투쟁을 강조하는 파와 외교 중심 활동을 강조하는 파 사이에 벌어진 갈등 노선은 무엇일까요?",
+    choices: ["무장투쟁론 vs 외교독립론", "왕정복고론 vs 공화정수립론", "한글보급론 vs 한문교육론", "수도이전론 vs 현상유지론"],
+    answer: 0,
+    explanation: "정답은 무장투쟁론 vs 외교독립론입니다. 독립운동 방법을 둘러싼 노선 갈등입니다.",
+  },
+  {
+    level: 5,
+    question: "1919년 대한민국 임시정부 성립 당시 초대 임시대통령으로 선출된 인물은 누구일까요?",
+    choices: ["이승만", "김구", "박은식", "안창호"],
+    answer: 0,
+    explanation: "정답은 이승만입니다. 미국에서 외교 활동을 펼치던 이승만이 초대 임시대통령으로 선출되었습니다.",
+  },
+  {
+    level: 5,
+    question: "대한민국 임시정부가 미국 워싱턴 D.C.에 설치하여 미주 지역 외교와 자금 모금을 담당하게 한 기구는 무엇일까요?",
+    choices: ["구미위원부", "파리위원부", "주미 한국대사관", "한인합동회"],
+    answer: 0,
+    explanation: "정답은 구미위원부입니다. 미국과 서구 강대국을 상대로 외교 독립운동을 펼친 임시정부 외교 기관입니다.",
+  },
+  {
+    level: 5,
+    question: "이승만 등이 미주 지역에서 주창했던 독립운동의 주된 방법은 무엇일까요?",
+    choices: ["외교독립론", "무장투쟁론", "의열투쟁론", "농촌계몽론"],
+    answer: 0,
+    explanation: "정답은 외교독립론입니다. 강대국의 외교적 지원과 국제연맹을 통해 독립을 이루고자 했습니다.",
+  },
+  {
+    level: 5,
+    question: "1925년 임시정부 의정원이 이승만 대통령을 탄핵하게 된 결정적 원인이 된 청원서는 무엇일까요?",
+    choices: ["위임통치 청원서", "파리 강화 회의 독립청원서", "2·8 독립선언서", "파리장서"],
+    answer: 0,
+    explanation: "정답은 위임통치 청원서입니다. 국제연맹에 한국 위임통치를 청원한 사실이 밝혀져 탄핵되었습니다.",
+  },
+  {
+    level: 5,
+    question: "서재필, 이승만 등이 청년 시절 활동하며 만민공동회를 개최했던 애국계몽 단체는 무엇일까요?",
+    choices: ["독립협회", "신민회", "신간회", "동학"],
+    answer: 0,
+    explanation: "정답은 독립협회입니다. 독립문 건립과 만민공동회를 통해 민권 운동과 자주독립 운동을 펼쳤습니다.",
+  },
+];
+
+const quizQuestionSets = {
+  윤동주: quizQuestions,
+  윤봉길: yunBonggilQuizQuestions,
+};
 const choiceMarkers = ["①", "②", "③", "④", "⑤"];
 const introProfiles = {
   윤동주: {
@@ -271,6 +459,10 @@ const quizOverallCounter = document.querySelector("#quizOverallCounter");
 const quizProgressBar = document.querySelector("#quizProgressBar");
 const playTitle = document.querySelector("#play-title");
 const nextQuizButton = document.querySelector("#nextQuizButton");
+const completionPortrait = document.querySelector("#completionPortrait");
+const completionImage = document.querySelector("#completionImage");
+const completionSymbol = document.querySelector("#completionSymbol");
+const completionText = document.querySelector("#completionText");
 const explainNextButton = document.querySelector("#explainNextButton");
 const stampNextButton = document.querySelector("#stampNextButton");
 const purchaseNextButton = document.querySelector("#purchaseNextButton");
@@ -282,6 +474,7 @@ let tagTimer;
 let quizResolved = false;
 let currentQuestionIndex = 0;
 let selectedNfcName = "";
+let activeQuizQuestions = quizQuestions;
 
 function clearTagTimer() {
   if (!tagTimer) return;
@@ -306,19 +499,23 @@ function setStep(step) {
   previousButton.disabled = step <= 1;
 }
 
+function getQuizQuestions(personName) {
+  return quizQuestionSets[personName] || quizQuestions;
+}
+
 function renderQuizQuestion() {
-  const question = quizQuestions[currentQuestionIndex];
+  const question = activeQuizQuestions[currentQuestionIndex];
   const questionNumberInLevel = (currentQuestionIndex % 5) + 1;
 
   quizStageMeta.textContent = `${question.level}단계 / 5문제 중 ${questionNumberInLevel}문제`;
   quizStageCounter.textContent = `${questionNumberInLevel}/5`;
-  quizOverallCounter.textContent = `전체 ${currentQuestionIndex + 1}/25`;
+  quizOverallCounter.textContent = `전체 ${currentQuestionIndex + 1}/${activeQuizQuestions.length}`;
   quizProgressBar.style.width = `${questionNumberInLevel * 20}%`;
   playTitle.textContent = question.question;
   quizFeedback.textContent = "정답을 선택하면 해설이 표시됩니다.";
   quizFeedback.classList.remove("is-success");
   nextQuizButton.hidden = true;
-  nextQuizButton.textContent = currentQuestionIndex === quizQuestions.length - 1 ? "결과 보기" : "다음 문제";
+  nextQuizButton.textContent = currentQuestionIndex === activeQuizQuestions.length - 1 ? "결과 보기" : "다음 문제";
 
   quizAnswerGrid.replaceChildren();
   question.choices.forEach((choice, index) => {
@@ -369,8 +566,30 @@ function renderIntroQuiz(personName) {
   }
 }
 
+function renderCompletion(personName) {
+  const profile = getIntroProfile(personName);
+  const summaries = {
+    윤동주: "윤동주와 무장 독립운동, 신민회까지 5단계 핵심 문제를 완료했습니다.",
+    윤봉길: "윤봉길 의사와 한인애국단, 의열투쟁과 임시정부 흐름까지 5단계 핵심 문제를 완료했습니다.",
+  };
+
+  completionPortrait.setAttribute("aria-label", `${profile.answer} 초상`);
+  completionText.textContent = `${summaries[profile.answer] || `${profile.answer} 관련 5단계 핵심 문제를 완료했습니다.`} 이제 획득한 도장을 확인하세요.`;
+
+  completionImage.hidden = !profile.image;
+  completionSymbol.hidden = Boolean(profile.image);
+  completionSymbol.textContent = profile.answer;
+
+  if (profile.image) {
+    completionImage.src = profile.image.src;
+    completionImage.alt = profile.image.alt;
+  }
+}
+
 function resetChoices() {
   renderIntroQuiz(selectedNfcName);
+  renderCompletion(selectedNfcName);
+  activeQuizQuestions = getQuizQuestions(selectedNfcName);
   currentQuestionIndex = 0;
   renderQuizQuestion();
   shareButton.textContent = "공유하기";
@@ -441,13 +660,15 @@ function revealAnswer(button) {
 }
 
 function startSequentialQuiz() {
+  activeQuizQuestions = getQuizQuestions(selectedNfcName);
+  renderCompletion(selectedNfcName);
   currentQuestionIndex = 0;
   renderQuizQuestion();
   setStep(6);
 }
 
 function showNextQuizQuestion() {
-  if (currentQuestionIndex === quizQuestions.length - 1) {
+  if (currentQuestionIndex === activeQuizQuestions.length - 1) {
     setStep(7);
     return;
   }
@@ -503,7 +724,7 @@ quizAnswerGrid.addEventListener("click", (event) => {
   const button = event.target.closest(".quiz-answer-choice");
   if (!button || button.disabled) return;
 
-  const question = quizQuestions[currentQuestionIndex];
+  const question = activeQuizQuestions[currentQuestionIndex];
   const selectedIndex = Number(button.dataset.index);
 
   if (selectedIndex === question.answer) {
