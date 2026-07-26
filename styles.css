@@ -1732,27 +1732,58 @@ button {
   font-size: 13px;
 }
 
-.reward-face {
-  width: 54px;
-  height: 54px;
+.reward-mask {
+  position: relative;
+  width: 58px;
+  height: 48px;
   display: block;
   border: 3px solid #191512;
-  border-radius: 50%;
+  border-radius: 48% 48% 42% 42%;
   background:
-    radial-gradient(circle at 18px 23px, #191512 0 4px, transparent 5px),
-    radial-gradient(circle at 36px 23px, #191512 0 4px, transparent 5px),
-    radial-gradient(circle at 50% 36px, #d9493d 0 7px, transparent 8px),
-    #fff;
+    radial-gradient(ellipse at 30% 45%, #191512 0 5px, transparent 6px),
+    radial-gradient(ellipse at 70% 45%, #191512 0 5px, transparent 6px),
+    radial-gradient(ellipse at 50% 72%, #d9493d 0 7px, transparent 8px),
+    #fff8e8;
+  transform: rotate(-6deg);
 }
 
-.reward-pen {
-  width: 16px;
-  height: 62px;
+.reward-mask::after {
+  content: "";
+  position: absolute;
+  right: -9px;
+  bottom: 4px;
+  width: 13px;
+  height: 18px;
+  border: 3px solid #191512;
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.reward-flute {
+  position: relative;
+  width: 66px;
+  height: 16px;
   display: block;
-  border-radius: 9px;
-  background: linear-gradient(#5b311f 0 72%, #14100d 72% 86%, #c8ad79 86%);
-  transform: rotate(35deg);
-  box-shadow: 8px 4px 0 rgba(48, 38, 30, 0.14);
+  border: 3px solid #2b251f;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 18px 50%, #201b17 0 3px, transparent 4px),
+    radial-gradient(circle at 31px 50%, #201b17 0 3px, transparent 4px),
+    radial-gradient(circle at 44px 50%, #201b17 0 3px, transparent 4px),
+    linear-gradient(90deg, #b88b4b, #d9b36c 52%, #9c713b);
+  transform: rotate(-12deg);
+  box-shadow: 5px 5px 0 rgba(48, 38, 30, 0.12);
+}
+
+.reward-flute::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 1px;
+  width: 7px;
+  height: 10px;
+  border-radius: 0 6px 6px 0;
+  background: #2b251f;
 }
 
 .keyword-action {
