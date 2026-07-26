@@ -930,6 +930,114 @@ const introProfiles = {
     },
   },
 };
+
+const activistIntroductions = {
+  윤동주: {
+    date: "1917.12.30 - 1945.2.16",
+    achievement: "연희전문 시절부터 항일 민족정신을 시로 발표했습니다. 일본 유학 중 동지들과 징병제 반대와 민족의식 고양을 모색하다 옥중에서 순국했습니다.",
+  },
+  홍범도: {
+    date: "1868.8.27 - 1943.10.25",
+    achievement: "대한독립군 사령으로 만주에서 독립군을 이끌며 항일무장투쟁에 앞장섰습니다. 갑산과 북청에서 일본군과 싸우고 간도에서도 일본군을 격파했습니다.",
+  },
+  김좌진: {
+    date: "1889.12.16 - 1930.1.24",
+    achievement: "교육과 계몽운동으로 민족의식을 높이고 독립운동 조직을 만들었습니다. 북로군정서를 이끌며 청산리대첩 등 만주 무장투쟁에서 큰 공을 세웠습니다.",
+  },
+  안창호: {
+    date: "1878.11.9 - 1938.3.10",
+    achievement: "독립협회와 공립협회 활동으로 민권과 교포 사회의 발전을 이끌었습니다. 귀국 후 신민회와 흥사단 운동에 힘쓰며 독립운동의 인재를 길렀습니다.",
+  },
+  김구: {
+    date: "1876.8.29 - 1949.6.26",
+    achievement: "동학농민운동과 치하포 의거 이후 항일운동에 헌신했습니다. 대한민국 임시정부를 이끌고 한인애국단을 조직해 독립운동의 중심을 세웠습니다.",
+  },
+  박은식: {
+    date: "1859.9.30 - 1925.11.1",
+    achievement: "신문 활동과 저술을 통해 애국독립사상을 널리 알렸습니다. 망명지에서 독립운동을 이어가며 대한민국 임시정부 대통령을 지냈습니다.",
+  },
+  김원봉: {
+    date: "1898.9.28 - 1958.11",
+    achievement: "의열단을 조직해 일제의 주요 기관을 겨냥한 의열투쟁을 이끌었습니다. 조선의용대와 광복군 활동에 참여해 무장 독립운동의 기반을 넓혔습니다.",
+  },
+  이봉창: {
+    date: "1901.8.10 - 1932.10.10",
+    achievement: "상하이에서 한인애국단에 가입해 독립운동에 나섰습니다. 도쿄에서 일왕을 향해 폭탄을 던져 한국 독립의 뜻을 세계에 알렸습니다.",
+  },
+  강우규: {
+    date: "1855.7.14 - 1920.11.29",
+    achievement: "만주와 연해주에서 교육 활동과 만세운동에 참여했습니다. 서울역에서 새 총독 사이토 마코토에게 폭탄을 던져 항일 의지를 드러냈습니다.",
+  },
+  유관순: {
+    date: "1902.12.16 - 1920.9.28",
+    achievement: "3·1운동과 아우내 장터 만세운동을 이끌어 독립정신을 널리 알렸습니다. 옥중에서도 만세운동을 이어가며 비폭력·평화·인권의 가치를 보여주었습니다.",
+  },
+  지청천: {
+    date: "1888.1.25 - 1957.1.15",
+    achievement: "신흥무관학교에서 독립군을 양성하고 만주에서 일본군과 맞섰습니다. 여러 독립군 부대를 이끌며 무장투쟁의 지휘관으로 활약했습니다.",
+  },
+  이회영: {
+    date: "1867.3.17 - 1932.11.17",
+    achievement: "신민회 활동 뒤 만주에 독립운동 기지를 마련했습니다. 경학사와 신흥강습소를 세워 군사훈련과 독립운동 인재 양성에 힘썼습니다.",
+  },
+  안창남: {
+    date: "1901.1.29 - 1930.4.2",
+    achievement: "비행사로 활동하다 중국으로 망명해 항일운동에 참여했습니다. 비행학교를 이끌고 대한독립공명단에 가입해 독립운동을 지원했습니다.",
+  },
+  김상옥: {
+    date: "1889.1.5 - 1923.1.22",
+    achievement: "야학교를 세워 어려운 학생들을 교육하고 국산품 애용 운동에도 힘썼습니다. 의열단 활동으로 일제 기관을 공격하고 항일 의거를 전개했습니다.",
+  },
+  윤봉길: {
+    date: "1908.6.21 - 1932.12.19",
+    achievement: "농촌 계몽과 야학 운영으로 민족의식을 높였습니다. 한인애국단에 가입해 상하이 홍커우 공원 의거를 일으켜 일제 침략을 세계에 알렸습니다.",
+  },
+  나석주: {
+    date: "1892.2.4 - 1926.12.28",
+    achievement: "만주에서 군사훈련을 받고 임시정부의 독립자금 마련과 국내 활동에 힘썼습니다. 일제 수탈 기관을 공격하는 의거를 벌이며 항일투쟁을 전개했습니다.",
+  },
+  김병로: {
+    date: "1887.12.15 - 1964.1.13",
+    achievement: "변호사로서 대동단 사건과 광주학생운동 관련 애국지사들을 변호했습니다. 광복 후 사법부장과 대법원장을 지내며 법치의 기반을 세웠습니다.",
+  },
+  이동휘: {
+    date: "1873.6.20 - 1935.1.31",
+    achievement: "교육기관 설립과 의병항쟁, 신민회 활동으로 독립운동의 기반을 넓혔습니다. 망명 뒤에도 독립운동 조직과 임시정부 활동에 참여했습니다.",
+  },
+  이승만: {
+    date: "1875.3.26 - 1965.7.19",
+    achievement: "협성회와 독립협회에서 독립민권사상을 알리고 언론 활동을 했습니다. 미국에서 학업과 외교 활동을 이어가며 독립운동을 지원했습니다.",
+  },
+  안중근: {
+    date: "1879.9.2 - 1910.3.26",
+    achievement: "의병을 양성해 두만강 부근에서 일본군과 싸웠습니다. 하얼빈역에서 이토 히로부미를 처단하고 여순감옥에서 순국했습니다.",
+  },
+  김규식: {
+    date: "1881.1.29 - 1950.12.10",
+    achievement: "대한민국 임시정부 수립에 참여해 외무총장과 학무총장을 지냈습니다. 국제연맹과 구미위원부에서 독립을 위한 외교 활동을 펼쳤습니다.",
+  },
+  여운형: {
+    date: "1885.4.24 - 1947.7.19",
+    achievement: "상하이에서 신한청년당을 조직하고 파리강화회의에 독립청원서를 냈습니다. 임시정부와 해방 후 건국·민족통일 운동에 헌신했습니다.",
+  },
+  주시경: {
+    date: "1876.11.7 - 1914.7.27",
+    achievement: "국어와 국문을 과학적으로 연구해 우리말의 가치를 높였습니다. 독립신문을 순한글로 발행하고 애국애족사상을 널리 알렸습니다.",
+  },
+  이승훈: {
+    date: "1864.3.25 - 1930.5.9",
+    achievement: "오산학교를 세워 학생들을 교육하고 독립운동을 지도했습니다. 신민회와 3·1운동에 참여하며 일제의 탄압 속에서도 독립운동을 이어갔습니다.",
+  },
+};
+
+const stageIntroductionOrder = {
+  윤동주: ["윤동주", "홍범도", "김좌진", "안창호", "윤동주"],
+  김구: ["김구", "박은식", "김원봉", "이봉창", "강우규"],
+  유관순: ["유관순", "지청천", "이회영", "안창남", "김상옥"],
+  윤봉길: ["윤봉길", "나석주", "김병로", "이동휘", "이승만"],
+  안중근: ["안중근", "김규식", "여운형", "주시경", "이승훈"],
+};
+
 const defaultIntroProfile = introProfiles["윤동주"];
 const app = document.querySelector(".app");
 const stages = [...document.querySelectorAll(".stage")];
@@ -1272,21 +1380,27 @@ function renderIntroQuiz(personName) {
 function renderStageIntroduction(personName) {
   const profile = getIntroProfile(personName);
   const completedLevel = Math.floor((currentQuestionIndex + 1) / 5);
+  const introductionNameForLevel = (stageIntroductionOrder[profile.answer] || stageIntroductionOrder.윤동주)[completedLevel - 1] || profile.answer;
+  const introduction = activistIntroductions[introductionNameForLevel] || {
+    date: profile.date,
+    achievement: profile.bio,
+  };
+  const portraitProfile = introProfiles[introductionNameForLevel];
 
-  completionPortrait.setAttribute("aria-label", `${profile.answer} 초상`);
+  completionPortrait.setAttribute("aria-label", `${introductionNameForLevel} 초상`);
   introductionStage.textContent = `${completedLevel}단계 완료`;
-  introductionName.textContent = profile.answer;
-  introductionDate.textContent = profile.date;
-  introductionAchievement.textContent = profile.bio;
+  introductionName.textContent = introductionNameForLevel;
+  introductionDate.textContent = introduction.date;
+  introductionAchievement.textContent = introduction.achievement;
   explainNextButton.textContent = completedLevel >= 5 ? "도장 확인하기" : `${completedLevel + 1}단계 시작하기`;
 
-  completionImage.hidden = !profile.image;
-  completionSymbol.hidden = Boolean(profile.image);
-  completionSymbol.textContent = profile.answer;
+  completionImage.hidden = !portraitProfile?.image;
+  completionSymbol.hidden = Boolean(portraitProfile?.image);
+  completionSymbol.textContent = introductionNameForLevel;
 
-  if (profile.image) {
-    completionImage.src = profile.image.src;
-    completionImage.alt = profile.image.alt;
+  if (portraitProfile?.image) {
+    completionImage.src = portraitProfile.image.src;
+    completionImage.alt = portraitProfile.image.alt;
   }
 
 }
