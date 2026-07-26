@@ -1038,6 +1038,32 @@ const stageIntroductionOrder = {
   안중근: ["안중근", "김규식", "여운형", "주시경", "이승훈"],
 };
 
+const activistPhotoSources = {
+  윤동주: "assets/activist-yoon-dongju.jpg",
+  홍범도: "assets/activist-hong-beomdo.jpg",
+  김좌진: "assets/activist-kim-jwajin.jpg",
+  안창호: "assets/activist-ahn-changho.jpg",
+  김구: "assets/activist-kim-gu.jpg",
+  박은식: "assets/activist-park-eunsik.jpg",
+  이봉창: "assets/activist-lee-bongchang.jpg",
+  강우규: "assets/activist-kang-woogyu.jpg",
+  유관순: "assets/activist-yu-gwansun.jpg",
+  지청천: "assets/activist-ji-cheongcheon.jpg",
+  이회영: "assets/activist-lee-hoeyeong.jpg",
+  안창남: "assets/activist-ahn-changnam.jpg",
+  김상옥: "assets/activist-kim-sangok.jpg",
+  윤봉길: "assets/activist-yoon-bonggil.jpg",
+  나석주: "assets/activist-na-seokju.jpg",
+  김병로: "assets/activist-kim-byeongro.jpg",
+  이동휘: "assets/activist-lee-donghwi.jpg",
+  이승만: "assets/activist-syngman-rhee.jpg",
+  안중근: "assets/activist-ahn-junggeun.jpg",
+  김규식: "assets/activist-kim-kyusik.jpg",
+  여운형: "assets/activist-yeo-unhyeong.jpg",
+  주시경: "assets/activist-ju-sigyeong.jpg",
+  이승훈: "assets/activist-lee-seunghun.jpg",
+};
+
 const defaultIntroProfile = introProfiles["윤동주"];
 const app = document.querySelector(".app");
 const stages = [...document.querySelectorAll(".stage")];
@@ -1385,7 +1411,7 @@ function renderStageIntroduction(personName) {
     date: profile.date,
     achievement: profile.bio,
   };
-  const portraitProfile = introProfiles[introductionNameForLevel];
+  const portraitSource = activistPhotoSources[introductionNameForLevel];
 
   completionPortrait.setAttribute("aria-label", `${introductionNameForLevel} 초상`);
   introductionStage.textContent = `${completedLevel}단계 완료`;
@@ -1394,13 +1420,13 @@ function renderStageIntroduction(personName) {
   introductionAchievement.textContent = introduction.achievement;
   explainNextButton.textContent = completedLevel >= 5 ? "도장 확인하기" : `${completedLevel + 1}단계 시작하기`;
 
-  completionImage.hidden = !portraitProfile?.image;
-  completionSymbol.hidden = Boolean(portraitProfile?.image);
+  completionImage.hidden = !portraitSource;
+  completionSymbol.hidden = Boolean(portraitSource);
   completionSymbol.textContent = introductionNameForLevel;
 
-  if (portraitProfile?.image) {
-    completionImage.src = portraitProfile.image.src;
-    completionImage.alt = portraitProfile.image.alt;
+  if (portraitSource) {
+    completionImage.src = portraitSource;
+    completionImage.alt = `${introductionNameForLevel} 사진`;
   }
 
 }
