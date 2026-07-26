@@ -978,6 +978,10 @@ const keywordNote = document.querySelector("#keywordNote");
 const finalGateButton = document.querySelector("#finalGateButton");
 const resetAllButton = document.querySelector("#resetAllButton");
 const finalRewardButton = document.querySelector("#finalRewardButton");
+const menuButtons = [...document.querySelectorAll(".icon-button")];
+const menuOverlay = document.querySelector("#menuOverlay");
+const menuCloseButton = document.querySelector("#menuCloseButton");
+const menuShopButton = document.querySelector("#menuShopButton");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
 
@@ -992,6 +996,15 @@ function clearTagTimer() {
   if (!tagTimer) return;
   window.clearTimeout(tagTimer);
   tagTimer = undefined;
+}
+
+function openMenu() {
+  menuOverlay.hidden = false;
+  menuCloseButton.focus();
+}
+
+function closeMenu() {
+  menuOverlay.hidden = true;
 }
 
 function setStep(step) {
@@ -1415,6 +1428,18 @@ function goToPreviousStep() {
 }
 
 tagButtons.forEach((button) => button.addEventListener("click", startTagFlow));
+menuButtons.forEach((button) => button.addEventListener("click", openMenu));
+menuCloseButton.addEventListener("click", closeMenu);
+menuOverlay.addEventListener("click", (event) => {
+  if (event.target === menuOverlay) closeMenu();
+});
+menuShopButton.addEventListener("click", () => {
+  closeMenu();
+  setStep(9);
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !menuOverlay.hidden) closeMenu();
+});
 previousButton.addEventListener("click", goToPreviousStep);
 restartButton.addEventListener("click", resetFlow);
 nextToQuizGuide.addEventListener("click", () => {

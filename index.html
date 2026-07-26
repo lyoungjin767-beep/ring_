@@ -468,6 +468,19 @@
       </section>
     </main>
 
-    <script src="app.js?v=20260726-reset-all"></script>
+    <div class="menu-overlay" id="menuOverlay" hidden>
+      <section class="app-menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+        <div class="menu-heading">
+          <strong id="menuTitle">기억하링- MENU</strong>
+          <button class="menu-close" id="menuCloseButton" type="button" aria-label="메뉴 닫기">×</button>
+        </div>
+        <nav class="menu-list" aria-label="메뉴 목록">
+          <button class="menu-item" type="button">독립운동 현충시설 위치</button>
+          <button class="menu-item" id="menuShopButton" type="button">다른키링 구매하기</button>
+        </nav>
+      </section>
+    </div>
+
+    <script src="app.js?v=20260726-menu"></script>
   </body>
 </html>
