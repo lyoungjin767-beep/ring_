@@ -1158,7 +1158,7 @@ function renderStampBoard(recentPersonName = selectedNfcName) {
 
   stampNextText.textContent = hasAllStamps
     ? "도장 5개를 모두 모았습니다. 대한독립만세 화면을 열어보세요."
-    : `현재 ${earnedStamps.length}/5개를 모았습니다. 다른 키링도 이어서 진행하세요.`;
+    : "다른 문제 풀러가기";
 }
 
 function renderIntroQuiz(personName) {
@@ -1362,7 +1362,7 @@ stampNextButton.addEventListener("click", () => {
     return;
   }
 
-  setStep(9);
+  resetFlow();
 });
 purchaseNextButton.addEventListener("click", () => setStep(10));
 finalRestartButton.addEventListener("click", resetFlow);
