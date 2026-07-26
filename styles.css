@@ -1148,6 +1148,11 @@ button {
   left: 29.5%;
 }
 
+.map-stamp.is-fifth {
+  top: 70.5%;
+  left: 68.2%;
+}
+
 .map-stamp.is-portrait-stamp {
   aspect-ratio: 1;
   object-fit: cover;
