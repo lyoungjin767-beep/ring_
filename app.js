@@ -936,6 +936,10 @@ const activistIntroductions = {
     date: "1917.12.30 - 1945.2.16",
     achievement: "연희전문 시절부터 항일 민족정신을 시로 발표했습니다. 일본 유학 중 동지들과 징병제 반대와 민족의식 고양을 모색하다 옥중에서 순국했습니다.",
   },
+  신채호: {
+    date: "1880.11.7 - 1936.2.21",
+    achievement: "황성신문과 대한매일신보의 논설 활동으로 일제의 침략을 비판하고 독립사상을 고취했습니다. 망명 뒤에도 언론과 임시정부 활동으로 조국 광복에 힘쓰다 옥중에서 순국했습니다.",
+  },
   홍범도: {
     date: "1868.8.27 - 1943.10.25",
     achievement: "대한독립군 사령으로 만주에서 독립군을 이끌며 항일무장투쟁에 앞장섰습니다. 갑산과 북청에서 일본군과 싸우고 간도에서도 일본군을 격파했습니다.",
@@ -1031,7 +1035,7 @@ const activistIntroductions = {
 };
 
 const stageIntroductionOrder = {
-  윤동주: ["윤동주", "홍범도", "김좌진", "안창호", "윤동주"],
+  윤동주: ["윤동주", "홍범도", "김좌진", "안창호", "신채호"],
   김구: ["김구", "박은식", "김원봉", "이봉창", "강우규"],
   유관순: ["유관순", "지청천", "이회영", "안창남", "김상옥"],
   윤봉길: ["윤봉길", "나석주", "김병로", "이동휘", "이승만"],
@@ -1040,6 +1044,7 @@ const stageIntroductionOrder = {
 
 const activistPhotoSources = {
   윤동주: "assets/activist-yoon-dongju.jpg",
+  신채호: "assets/activist-shin-chaeho.jpg",
   홍범도: "assets/activist-hong-beomdo.jpg",
   김좌진: "assets/activist-kim-jwajin.jpg",
   안창호: "assets/activist-ahn-changho.jpg",
