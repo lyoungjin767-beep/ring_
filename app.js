@@ -975,6 +975,7 @@ const purchaseNextButton = document.querySelector("#purchaseNextButton");
 const shareButton = document.querySelector("#shareButton");
 const keywordButton = document.querySelector("#keywordButton");
 const keywordNote = document.querySelector("#keywordNote");
+const finalGateButton = document.querySelector("#finalGateButton");
 const finalRestartButton = document.querySelector("#finalRestartButton");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
@@ -1076,6 +1077,7 @@ function saveEarnedStamps(stamps) {
 
 function renderNfcCompletionStates() {
   const earnedStamps = loadEarnedStamps();
+  const hasAllStamps = earnedStamps.length >= stampPeople.length;
 
   tagButtons.forEach((button) => {
     const personName = button.dataset.person || "";
@@ -1094,6 +1096,8 @@ function renderNfcCompletionStates() {
     button.classList.toggle("is-completed", isCompleted);
     button.setAttribute("aria-label", isCompleted ? `${personName} NFC 완료` : `${personName} NFC 선택`);
   });
+
+  finalGateButton.hidden = !hasAllStamps;
 
   return earnedStamps.length;
 }
@@ -1199,7 +1203,7 @@ function renderStampBoard(recentPersonName = selectedNfcName) {
     : `${completedQuestionCount}문제를 모두 완료했어요!<br />${stampedPersonName} 도장을 획득했습니다.`;
 
   stampNextText.textContent = hasAllStamps
-    ? "도장 5개를 모두 모았습니다. 대한독립만세 화면을 열어보세요."
+    ? "대한독립만세 화면으로 가기"
     : "다른 문제 풀러가기";
 }
 
@@ -1290,7 +1294,7 @@ function resetFlow() {
   const completedCount = renderNfcCompletionStates();
   if (completedCount >= stampPeople.length) {
     scanTitle.textContent = "모든 NFC 문제를 완료했습니다";
-    scanText.textContent = "도장 5개를 모두 모았습니다.";
+    scanText.textContent = "대한독립만세 화면으로 이동할 수 있습니다.";
   }
   setStep(1);
 }
@@ -1419,17 +1423,9 @@ guideNextButton.addEventListener("click", () => {
 startQuizButton.addEventListener("click", startSequentialQuiz);
 nextQuizButton.addEventListener("click", showNextQuizQuestion);
 explainNextButton.addEventListener("click", () => {
-  const earnedStamps = markStampEarned(selectedNfcName);
+  markStampEarned(selectedNfcName);
   renderStampBoard(selectedNfcName);
   setStep(8);
-
-  if (earnedStamps.length >= stampPeople.length) {
-    window.setTimeout(() => {
-      if (Number(app.dataset.step) === 8) {
-        setStep(11);
-      }
-    }, 1400);
-  }
 });
 stampNextButton.addEventListener("click", () => {
   if (loadEarnedStamps().length >= stampPeople.length) {
@@ -1440,6 +1436,7 @@ stampNextButton.addEventListener("click", () => {
   resetFlow();
 });
 purchaseNextButton.addEventListener("click", () => setStep(10));
+finalGateButton.addEventListener("click", () => setStep(11));
 finalRestartButton.addEventListener("click", resetFlow);
 
 answerGrid.addEventListener("click", (event) => {

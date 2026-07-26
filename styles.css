@@ -640,6 +640,15 @@ button {
   font-size: 15px;
 }
 
+.final-gate-action {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.final-gate-action[hidden] {
+  display: none;
+}
+
 .nfc-icon {
   grid-row: span 2;
   width: 35px;
