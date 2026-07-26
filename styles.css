@@ -1130,6 +1130,8 @@ button {
   width: 25%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
+  clip-path: circle(42%);
+  mix-blend-mode: multiply;
   filter: drop-shadow(0 3px 4px rgba(77, 34, 24, 0.26));
 }
 
@@ -1158,6 +1160,8 @@ button {
   object-fit: cover;
   border: 4px solid #d43a32;
   background: #fff8ec;
+  clip-path: none;
+  mix-blend-mode: normal;
 }
 
 .quiz-progress {
