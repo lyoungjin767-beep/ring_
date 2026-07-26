@@ -1996,8 +1996,7 @@ shareButton.addEventListener("click", () => {
 });
 
 keywordButton.addEventListener("click", () => {
-  keywordButton.textContent = "신청 완료";
-  keywordNote.textContent = "최종 리워드 신청이 완료되었습니다.";
+  window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSfxMbrGjAOD7Kv2izmaOCAfqHkCvv-RWVzWzlwpdY-oiz0pbA/viewform?usp=publish-editor";
 });
 
 resetFlow();
