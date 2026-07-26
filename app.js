@@ -977,7 +977,7 @@ const keywordButton = document.querySelector("#keywordButton");
 const keywordNote = document.querySelector("#keywordNote");
 const finalGateButton = document.querySelector("#finalGateButton");
 const resetAllButton = document.querySelector("#resetAllButton");
-const finalRestartButton = document.querySelector("#finalRestartButton");
+const finalRewardButton = document.querySelector("#finalRewardButton");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
 
@@ -995,6 +995,10 @@ function clearTagTimer() {
 }
 
 function setStep(step) {
+  if (step >= 10 && loadEarnedStamps().length < stampPeople.length) {
+    step = 9;
+  }
+
   app.dataset.step = String(step);
 
   stages.forEach((stage) => {
@@ -1208,12 +1212,10 @@ function renderStampBoard(recentPersonName = selectedNfcName) {
   });
 
   stampTitle.innerHTML = hasAllStamps
-    ? "도장 5개를 모두 모았습니다!<br />대한독립만세 화면으로 이동하세요."
+    ? "도장 5개를 모두 모았습니다!<br />다른 키링 구매 화면으로 이동하세요."
     : `${completedQuestionCount}문제를 모두 완료했어요!<br />${stampedPersonName} 도장을 획득했습니다.`;
 
-  stampNextText.textContent = hasAllStamps
-    ? "대한독립만세 화면으로 가기"
-    : "다른 문제 풀러가기";
+  stampNextText.textContent = "다른 키링 보러가기";
 }
 
 function renderIntroQuiz(personName) {
@@ -1397,11 +1399,6 @@ function showNextQuizQuestion() {
 function goToPreviousStep() {
   const currentStep = Number(app.dataset.step) || 1;
 
-  if (currentStep === 11) {
-    setStep(8);
-    return;
-  }
-
   const previousStep = Math.max(1, currentStep - 1);
 
   if (previousStep === currentStep) return;
@@ -1444,17 +1441,19 @@ explainNextButton.addEventListener("click", () => {
   setStep(8);
 });
 stampNextButton.addEventListener("click", () => {
+  setStep(9);
+});
+purchaseNextButton.addEventListener("click", () => {
   if (loadEarnedStamps().length >= stampPeople.length) {
-    setStep(11);
+    setStep(10);
     return;
   }
 
   resetFlow();
 });
-purchaseNextButton.addEventListener("click", () => setStep(10));
-finalGateButton.addEventListener("click", () => setStep(11));
+finalGateButton.addEventListener("click", () => setStep(10));
 resetAllButton.addEventListener("click", resetAllProgress);
-finalRestartButton.addEventListener("click", resetFlow);
+finalRewardButton.addEventListener("click", () => setStep(11));
 
 answerGrid.addEventListener("click", (event) => {
   const button = event.target.closest(".answer-choice");
