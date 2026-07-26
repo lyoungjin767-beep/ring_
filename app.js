@@ -924,6 +924,10 @@ const introProfiles = {
     role: "의병장, 독립운동가",
     date: "1879.9.2 - 1910.3.26",
     bio: "하얼빈 의거와 동양평화론으로 독립과 평화의 뜻을 남겼습니다.",
+    image: {
+      src: "assets/ahn-jung-geun.jpg",
+      alt: "안중근 사진",
+    },
   },
 };
 const defaultIntroProfile = introProfiles["윤동주"];
@@ -959,19 +963,28 @@ const nextQuizButton = document.querySelector("#nextQuizButton");
 const completionPortrait = document.querySelector("#completionPortrait");
 const completionImage = document.querySelector("#completionImage");
 const completionSymbol = document.querySelector("#completionSymbol");
+const explainTitle = document.querySelector("#explain-title");
 const completionText = document.querySelector("#completionText");
 const explainNextButton = document.querySelector("#explainNextButton");
 const stampNextButton = document.querySelector("#stampNextButton");
+const stampTitle = document.querySelector("#stamp-title");
+const stampNextText = document.querySelector("#stampNextText");
+const stampRows = [...document.querySelectorAll(".stamp-status-row")];
+const stampMapSlots = [...document.querySelectorAll(".map-stamp-slot")];
 const purchaseNextButton = document.querySelector("#purchaseNextButton");
 const shareButton = document.querySelector("#shareButton");
 const keywordButton = document.querySelector("#keywordButton");
 const keywordNote = document.querySelector("#keywordNote");
+const finalRestartButton = document.querySelector("#finalRestartButton");
+const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
+const stampStorageKey = "gieokharing-earned-stamps";
 
 let tagTimer;
 let quizResolved = false;
 let currentQuestionIndex = 0;
 let selectedNfcName = "";
 let activeQuizQuestions = quizQuestions;
+let memoryEarnedStamps = [];
 
 function clearTagTimer() {
   if (!tagTimer) return;
@@ -992,6 +1005,12 @@ function setStep(step) {
     dot.classList.toggle("is-active", index + 1 === step);
     dot.classList.toggle("is-complete", index + 1 < step);
   });
+
+  renderStampRows();
+
+  if (step === 8) {
+    renderStampBoard(selectedNfcName);
+  }
 
   previousButton.disabled = step <= 1;
 }
@@ -1027,6 +1046,119 @@ function renderQuizQuestion() {
 
 function getIntroProfile(personName) {
   return introProfiles[personName] || defaultIntroProfile;
+}
+
+function loadEarnedStamps() {
+  try {
+    const savedStamps = JSON.parse(window.localStorage.getItem(stampStorageKey) || "[]");
+
+    if (!Array.isArray(savedStamps)) return [];
+
+    return savedStamps.filter((personName, index) => {
+      return stampPeople.includes(personName) && savedStamps.indexOf(personName) === index;
+    });
+  } catch {
+    return memoryEarnedStamps;
+  }
+}
+
+function saveEarnedStamps(stamps) {
+  memoryEarnedStamps = [...stamps];
+
+  try {
+    window.localStorage.setItem(stampStorageKey, JSON.stringify(stamps));
+  } catch {}
+}
+
+function getStampPersonName(personName) {
+  const profile = getIntroProfile(personName);
+  return stampPeople.includes(profile.answer) ? profile.answer : stampPeople[0];
+}
+
+function markStampEarned(personName) {
+  const stampPersonName = getStampPersonName(personName);
+  const earnedStamps = loadEarnedStamps();
+
+  if (!earnedStamps.includes(stampPersonName)) {
+    earnedStamps.push(stampPersonName);
+    saveEarnedStamps(earnedStamps);
+  }
+
+  return earnedStamps;
+}
+
+function renderStampFaces() {
+  stampMapSlots.forEach((slot) => {
+    const personName = slot.dataset.stampPerson;
+    const profile = getIntroProfile(personName);
+    const face = slot.querySelector(".stamp-face");
+
+    if (!face || face.dataset.person === personName) return;
+
+    face.dataset.person = personName;
+    face.replaceChildren();
+
+    if (profile.image) {
+      const image = document.createElement("img");
+      image.src = profile.image.src;
+      image.alt = "";
+      face.append(image);
+    } else {
+      const fallback = document.createElement("span");
+      fallback.className = "stamp-face-fallback";
+      fallback.textContent = personName;
+      face.append(fallback);
+    }
+
+    const label = document.createElement("b");
+    label.textContent = personName;
+    face.append(label);
+  });
+}
+
+function renderStampRows(earnedStamps = loadEarnedStamps()) {
+  stampRows.forEach((row) => {
+    const count = row.querySelector("b");
+
+    [...row.querySelectorAll("span")].forEach((slot, index) => {
+      const personName = stampPeople[index];
+      slot.classList.toggle("is-earned", earnedStamps.includes(personName));
+      slot.setAttribute("title", personName);
+    });
+
+    if (count) {
+      count.textContent = `${earnedStamps.length}/5`;
+    }
+
+    row.setAttribute("aria-label", `획득 도장 ${earnedStamps.length}개`);
+  });
+}
+
+function renderStampBoard(recentPersonName = selectedNfcName) {
+  const earnedStamps = loadEarnedStamps();
+  const stampedPersonName = getStampPersonName(recentPersonName);
+  const completedQuestionCount = getQuizQuestions(stampedPersonName).length;
+  const hasAllStamps = earnedStamps.length >= stampPeople.length;
+
+  renderStampFaces();
+  renderStampRows(earnedStamps);
+
+  stampMapSlots.forEach((slot) => {
+    const personName = slot.dataset.stampPerson;
+    const isEarned = earnedStamps.includes(personName);
+
+    slot.classList.toggle("is-earned", isEarned);
+    slot.classList.toggle("is-current", isEarned && personName === stampedPersonName);
+    slot.setAttribute("aria-label", isEarned ? `${personName} 도장 획득` : `${personName} 도장 미획득`);
+  });
+
+  stampTitle.innerHTML = hasAllStamps
+    ? "도장 5개를 모두 모았습니다!<br />대한독립만세 화면으로 이동하세요."
+    : `${completedQuestionCount}문제를 모두 완료했어요!<br />${stampedPersonName} 도장을 획득했습니다.`;
+
+  stampNextText.textContent = hasAllStamps
+    ? "도장 5개를 모두 모았습니다. 대한독립만세 화면을 열어보세요."
+    : `현재 ${earnedStamps.length}/5개를 모았습니다. 다른 키링도 이어서 진행하세요.`;
 }
 
 function renderIntroQuiz(personName) {
@@ -1065,6 +1197,7 @@ function renderIntroQuiz(personName) {
 
 function renderCompletion(personName) {
   const profile = getIntroProfile(personName);
+  const completedQuestionCount = getQuizQuestions(profile.answer).length;
   const summaries = {
     윤동주: "윤동주와 무장 독립운동, 신민회까지 5단계 핵심 문제를 완료했습니다.",
     김구: "김구 선생과 대한민국 임시정부, 한인애국단과 광복군 흐름까지 5단계 핵심 문제를 완료했습니다.",
@@ -1074,6 +1207,7 @@ function renderCompletion(personName) {
   };
 
   completionPortrait.setAttribute("aria-label", `${profile.answer} 초상`);
+  explainTitle.textContent = `${completedQuestionCount}문제를 모두 풀었습니다!`;
   completionText.textContent = `${summaries[profile.answer] || `${profile.answer} 관련 5단계 핵심 문제를 완료했습니다.`} 이제 획득한 도장을 확인하세요.`;
 
   completionImage.hidden = !profile.image;
@@ -1089,6 +1223,7 @@ function renderCompletion(personName) {
 function resetChoices() {
   renderIntroQuiz(selectedNfcName);
   renderCompletion(selectedNfcName);
+  renderStampRows();
   activeQuizQuestions = getQuizQuestions(selectedNfcName);
   currentQuestionIndex = 0;
   renderQuizQuestion();
@@ -1179,6 +1314,12 @@ function showNextQuizQuestion() {
 
 function goToPreviousStep() {
   const currentStep = Number(app.dataset.step) || 1;
+
+  if (currentStep === 11) {
+    setStep(8);
+    return;
+  }
+
   const previousStep = Math.max(1, currentStep - 1);
 
   if (previousStep === currentStep) return;
@@ -1201,9 +1342,29 @@ nextToQuizGuide.addEventListener("click", () => setStep(4));
 guideNextButton.addEventListener("click", () => setStep(5));
 startQuizButton.addEventListener("click", startSequentialQuiz);
 nextQuizButton.addEventListener("click", showNextQuizQuestion);
-explainNextButton.addEventListener("click", () => setStep(8));
-stampNextButton.addEventListener("click", () => setStep(9));
+explainNextButton.addEventListener("click", () => {
+  const earnedStamps = markStampEarned(selectedNfcName);
+  renderStampBoard(selectedNfcName);
+  setStep(8);
+
+  if (earnedStamps.length >= stampPeople.length) {
+    window.setTimeout(() => {
+      if (Number(app.dataset.step) === 8) {
+        setStep(11);
+      }
+    }, 1400);
+  }
+});
+stampNextButton.addEventListener("click", () => {
+  if (loadEarnedStamps().length >= stampPeople.length) {
+    setStep(11);
+    return;
+  }
+
+  setStep(9);
+});
 purchaseNextButton.addEventListener("click", () => setStep(10));
+finalRestartButton.addEventListener("click", resetFlow);
 
 answerGrid.addEventListener("click", (event) => {
   const button = event.target.closest(".answer-choice");

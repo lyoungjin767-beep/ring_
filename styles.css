@@ -637,7 +637,8 @@ button {
 .explain-panel,
 .stamp-panel,
 .shop-panel,
-.share-panel {
+.share-panel,
+.final-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -651,7 +652,8 @@ button {
 .explain-panel h1,
 .stamp-panel h1,
 .shop-panel h1,
-.share-panel h1 {
+.share-panel h1,
+.final-panel h1 {
   margin: 12px 0 18px;
   text-align: center;
   font-size: 20px;
@@ -1274,6 +1276,182 @@ button {
   font-size: 15px;
 }
 
+.stamp-map {
+  position: relative;
+  width: 100%;
+  height: 264px;
+  margin: 2px 0 14px;
+  overflow: hidden;
+  border: 1px solid #d0a26d;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(151, 95, 52, 0.18) 0 34px, transparent 35px),
+    radial-gradient(circle at 78% 18%, rgba(41, 111, 104, 0.13) 0 42px, transparent 43px),
+    radial-gradient(circle at 68% 78%, rgba(214, 66, 57, 0.12) 0 50px, transparent 51px),
+    linear-gradient(135deg, rgba(255, 246, 228, 0.92), rgba(239, 219, 177, 0.74));
+  box-shadow: inset 0 0 0 4px rgba(255, 253, 248, 0.48), 0 12px 22px rgba(105, 70, 35, 0.1);
+}
+
+.stamp-map::before,
+.stamp-map::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.stamp-map::before {
+  inset: 18px 22px;
+  border: 1px dashed rgba(92, 63, 37, 0.26);
+  border-radius: 45% 55% 52% 48%;
+  background:
+    linear-gradient(38deg, transparent 0 42%, rgba(92, 63, 37, 0.17) 42% 43%, transparent 44%),
+    linear-gradient(142deg, transparent 0 56%, rgba(92, 63, 37, 0.12) 56% 57%, transparent 58%);
+  transform: rotate(-4deg);
+}
+
+.stamp-map::after {
+  left: 24px;
+  right: 24px;
+  bottom: 34px;
+  height: 70px;
+  border: 1px solid rgba(41, 111, 104, 0.24);
+  border-top: 0;
+  border-radius: 0 0 50% 50%;
+  transform: rotate(5deg);
+}
+
+.map-route {
+  position: absolute;
+  z-index: 1;
+  height: 2px;
+  border-top: 2px dashed rgba(91, 61, 34, 0.24);
+  transform-origin: left center;
+}
+
+.route-one {
+  top: 102px;
+  left: 76px;
+  width: 218px;
+  transform: rotate(12deg);
+}
+
+.route-two {
+  top: 178px;
+  left: 84px;
+  width: 196px;
+  transform: rotate(-17deg);
+}
+
+.map-stamp-slot {
+  position: absolute;
+  z-index: 2;
+  width: 62px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border: 2px dashed rgba(117, 80, 43, 0.5);
+  border-radius: 50%;
+  color: #7b6249;
+  background: rgba(255, 253, 248, 0.62);
+}
+
+.map-stamp-slot::before {
+  content: attr(data-short);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.map-stamp-slot.is-earned {
+  border-style: solid;
+  border-color: #be3029;
+  color: #fffaf1;
+  background: #d64239;
+  box-shadow: 0 8px 16px rgba(127, 40, 34, 0.18);
+}
+
+.map-stamp-slot.is-current {
+  animation: stampPop 360ms ease both;
+}
+
+.map-stamp-slot.is-earned::before {
+  content: "";
+}
+
+.stamp-face {
+  position: absolute;
+  inset: 5px;
+  display: none;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid rgba(255, 250, 241, 0.88);
+  border-radius: 50%;
+  background: #fff7f0;
+}
+
+.map-stamp-slot.is-earned .stamp-face {
+  display: grid;
+}
+
+.stamp-face img {
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  object-position: center top;
+  filter: sepia(0.48) saturate(1.45) hue-rotate(320deg) contrast(1.08);
+}
+
+.stamp-face b {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1px 0 2px;
+  color: #fffaf1;
+  background: rgba(180, 38, 33, 0.82);
+  font-size: 9px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.stamp-face-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  color: #fffaf1;
+  background: #b92f29;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.slot-yoon {
+  top: 30px;
+  left: 36px;
+}
+
+.slot-kim {
+  top: 42px;
+  right: 40px;
+}
+
+.slot-yu {
+  top: 128px;
+  left: 58px;
+}
+
+.slot-yun {
+  right: 56px;
+  bottom: 48px;
+}
+
+.slot-ahn {
+  left: calc(50% - 31px);
+  bottom: 26px;
+}
+
 .stamp-medal {
   margin: 8px 0 18px;
 }
@@ -1283,13 +1461,15 @@ button {
   margin-bottom: 14px;
 }
 
-.stamp-row .earned {
+.stamp-row .earned,
+.stamp-row .is-earned {
   position: relative;
   border-color: #d64239;
   background: #d64239;
 }
 
-.stamp-row .earned::before {
+.stamp-row .earned::before,
+.stamp-row .is-earned::before {
   content: "★";
   position: absolute;
   inset: 0;
@@ -1547,6 +1727,26 @@ button {
   font-size: 11px;
 }
 
+.final-panel h1 {
+  font-size: 17px;
+}
+
+.independence-banner {
+  width: 100%;
+  margin: 8px 0 18px;
+  padding: 12px;
+  border: 1px solid #d0a26d;
+  border-radius: 8px;
+  background: #fffaf1;
+  box-shadow: inset 0 0 0 4px rgba(255, 253, 248, 0.72), 0 12px 22px rgba(105, 70, 35, 0.1);
+}
+
+.independence-banner img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+}
+
 .flow-arrow {
   display: none;
 }
@@ -1648,6 +1848,20 @@ button {
 
   70% {
     transform: translateX(6px);
+  }
+}
+
+@keyframes stampPop {
+  0% {
+    transform: scale(0.72);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
 

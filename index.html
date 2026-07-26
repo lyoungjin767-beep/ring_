@@ -8,7 +8,7 @@
       content="3D 키링 NFC 태그 후 독립운동가 퀴즈와 정답 공개가 차례대로 이어지는 웹 서비스 화면입니다."
     />
     <title>기억하링 NFC 키링</title>
-    <link rel="stylesheet" href="styles.css?v=20260726-all-quizzes" />
+    <link rel="stylesheet" href="styles.css?v=20260726-stamp-map" />
   </head>
   <body>
     <main class="app" data-step="1">
@@ -226,7 +226,7 @@
 
                 <div class="stamp-board">
                   <strong>내 도장 현황</strong>
-                  <div class="stamp-row" aria-label="획득 도장 0개">
+                  <div class="stamp-row stamp-status-row" aria-label="획득 도장 0개">
                     <span></span><span></span><span></span><span></span><span></span>
                     <b>0/5</b>
                   </div>
@@ -314,19 +314,35 @@
 
               <section class="stamp-panel" aria-labelledby="stamp-title">
                 <h1 id="stamp-title">25문제를 모두 완료했어요!<br />도장 1개를 획득했습니다.</h1>
-                <div class="stamp-medal" aria-hidden="true">
-                  <img src="assets/yoon-dongju.png" alt="" />
+                <div class="stamp-map" aria-label="독립운동가 도장 지도">
+                  <span class="map-route route-one" aria-hidden="true"></span>
+                  <span class="map-route route-two" aria-hidden="true"></span>
+                  <span class="map-stamp-slot slot-yoon" data-stamp-person="윤동주" data-short="윤동주">
+                    <span class="stamp-face"></span>
+                  </span>
+                  <span class="map-stamp-slot slot-kim" data-stamp-person="김구" data-short="김구">
+                    <span class="stamp-face"></span>
+                  </span>
+                  <span class="map-stamp-slot slot-yu" data-stamp-person="유관순" data-short="유관순">
+                    <span class="stamp-face"></span>
+                  </span>
+                  <span class="map-stamp-slot slot-yun" data-stamp-person="윤봉길" data-short="윤봉길">
+                    <span class="stamp-face"></span>
+                  </span>
+                  <span class="map-stamp-slot slot-ahn" data-stamp-person="안중근" data-short="안중근">
+                    <span class="stamp-face"></span>
+                  </span>
                 </div>
                 <div class="stamp-board is-earned">
                   <strong>내 도장 현황</strong>
-                  <div class="stamp-row" aria-label="획득 도장 1개">
-                    <span class="earned"></span><span></span><span></span><span></span><span></span>
+                  <div class="stamp-row stamp-status-row" aria-label="획득 도장 1개">
+                    <span></span><span></span><span></span><span></span><span></span>
                     <b>1/5</b>
                   </div>
                 </div>
                 <button class="next-card next-action" id="stampNextButton" type="button">
-                  <span aria-hidden="true">♟</span>
-                  <p>총 5개의 도장을 모아 랭킹을 달성하세요.</p>
+                  <span aria-hidden="true">★</span>
+                  <p id="stampNextText">총 5개의 도장을 모아 랭킹을 달성하세요.</p>
                 </button>
               </section>
             </div>
@@ -401,6 +417,29 @@
               </section>
             </div>
           </article>
+
+          <article class="stage stage-eleven" data-stage="11">
+            <div class="stage-label">
+              <span class="stage-number">11</span>
+              <strong>대한독립만세</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="final-panel" aria-labelledby="final-title">
+                <h1 id="final-title">도장 5개를 모두 모았습니다!</h1>
+                <figure class="independence-banner">
+                  <img src="assets/independence-banner.png" alt="대한독립만세" />
+                </figure>
+                <button class="primary-action" id="finalRestartButton" type="button">처음 화면으로</button>
+              </section>
+            </div>
+          </article>
         </div>
 
         <nav class="flow-controls" aria-label="단계 제어">
@@ -417,11 +456,12 @@
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
+            <span class="dot"></span>
           </div>
         </nav>
       </section>
     </main>
 
-    <script src="app.js?v=20260726-all-quizzes"></script>
+    <script src="app.js?v=20260726-stamp-map"></script>
   </body>
 </html>
