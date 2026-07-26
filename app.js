@@ -964,6 +964,7 @@ const completionPortrait = document.querySelector("#completionPortrait");
 const completionImage = document.querySelector("#completionImage");
 const completionSymbol = document.querySelector("#completionSymbol");
 const completionText = document.querySelector("#completionText");
+const mapStamp = document.querySelector("#mapStamp");
 const explainNextButton = document.querySelector("#explainNextButton");
 const stampNextButton = document.querySelector("#stampNextButton");
 const purchaseNextButton = document.querySelector("#purchaseNextButton");
@@ -1088,6 +1089,12 @@ function renderCompletion(personName) {
     completionImage.src = profile.image.src;
     completionImage.alt = profile.image.alt;
   }
+
+  const isYuGwanSun = profile.answer === "유관순";
+  mapStamp.src = isYuGwanSun ? profile.image.src : "assets/yoon-stamp.png";
+  mapStamp.alt = isYuGwanSun ? "유관순 획득 도장" : "윤동주 획득 도장";
+  mapStamp.classList.toggle("is-third", isYuGwanSun);
+  mapStamp.classList.toggle("is-portrait-stamp", isYuGwanSun);
 }
 
 function resetChoices() {

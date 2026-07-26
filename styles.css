@@ -1133,6 +1133,18 @@ button {
   filter: drop-shadow(0 3px 4px rgba(77, 34, 24, 0.26));
 }
 
+.map-stamp.is-third {
+  top: 52%;
+  left: 48.5%;
+}
+
+.map-stamp.is-portrait-stamp {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 4px solid #d43a32;
+  background: #fff8ec;
+}
+
 .quiz-progress {
   width: 100%;
   display: flex;
