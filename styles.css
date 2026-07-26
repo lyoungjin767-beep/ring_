@@ -221,11 +221,30 @@ button {
     0 0 0 3px rgba(41, 111, 104, 0.13);
 }
 
+.nfc-select-card.is-completed {
+  color: #6d5b48;
+  border-color: rgba(190, 140, 61, 0.44);
+  background: #f3eadc;
+  box-shadow: none;
+}
+
+.nfc-select-card.is-completed:hover {
+  transform: none;
+  border-color: rgba(190, 140, 61, 0.44);
+  background: #f3eadc;
+  box-shadow: none;
+}
+
+.nfc-select-card.is-completed::after {
+  content: "완료";
+  background: #d64239;
+}
+
 .nfc-select-card:disabled {
   cursor: default;
 }
 
-.nfc-select-card:not(.is-selected):disabled {
+.nfc-select-card:not(.is-selected):disabled:not(.is-completed) {
   opacity: 0.58;
 }
 
@@ -240,6 +259,24 @@ button {
   text-align: center;
   overflow-wrap: anywhere;
   word-break: keep-all;
+}
+
+.nfc-complete-badge {
+  position: absolute;
+  z-index: 2;
+  left: 8px;
+  bottom: 8px;
+  padding: 3px 7px;
+  border: 1px solid rgba(214, 66, 57, 0.28);
+  border-radius: 999px;
+  color: #a62c25;
+  background: #fff7e7;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.nfc-complete-badge[hidden] {
+  display: none;
 }
 
 .nfc-choice-mark {

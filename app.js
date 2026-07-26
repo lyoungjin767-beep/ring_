@@ -1012,6 +1012,10 @@ function setStep(step) {
     renderStampBoard(selectedNfcName);
   }
 
+  if (step === 1) {
+    renderNfcCompletionStates();
+  }
+
   previousButton.disabled = step <= 1;
 }
 
@@ -1070,9 +1074,46 @@ function saveEarnedStamps(stamps) {
   } catch {}
 }
 
+function renderNfcCompletionStates() {
+  const earnedStamps = loadEarnedStamps();
+
+  tagButtons.forEach((button) => {
+    const personName = button.dataset.person || "";
+    const isCompleted = earnedStamps.includes(personName);
+    let badge = button.querySelector(".nfc-complete-badge");
+
+    if (!badge) {
+      badge = document.createElement("span");
+      badge.className = "nfc-complete-badge";
+      button.append(badge);
+    }
+
+    badge.textContent = "완료";
+    badge.hidden = !isCompleted;
+    button.disabled = isCompleted;
+    button.classList.toggle("is-completed", isCompleted);
+    button.setAttribute("aria-label", isCompleted ? `${personName} NFC 완료` : `${personName} NFC 선택`);
+  });
+
+  return earnedStamps.length;
+}
+
 function getStampPersonName(personName) {
   const profile = getIntroProfile(personName);
   return stampPeople.includes(profile.answer) ? profile.answer : stampPeople[0];
+}
+
+function isPersonCompleted(personName) {
+  if (!personName) return false;
+  return loadEarnedStamps().includes(getStampPersonName(personName));
+}
+
+function returnToFirstWithCompletedMessage(personName) {
+  const completedPersonName = getStampPersonName(personName);
+
+  resetFlow();
+  scanTitle.textContent = `${completedPersonName} 문제는 이미 완료했습니다`;
+  scanText.textContent = "다른 NFC 인물을 선택해주세요.";
 }
 
 function markStampEarned(personName) {
@@ -1084,6 +1125,7 @@ function markStampEarned(personName) {
     saveEarnedStamps(earnedStamps);
   }
 
+  renderNfcCompletionStates();
   return earnedStamps;
 }
 
@@ -1245,6 +1287,11 @@ function resetFlow() {
   scanTitle.textContent = "NFC 인물을 선택해주세요";
   scanText.textContent = "인형 대신 원하는 NFC 카드를 클릭하면 다음 화면으로 넘어갑니다.";
   resetChoices();
+  const completedCount = renderNfcCompletionStates();
+  if (completedCount >= stampPeople.length) {
+    scanTitle.textContent = "모든 NFC 문제를 완료했습니다";
+    scanText.textContent = "도장 5개를 모두 모았습니다.";
+  }
   setStep(1);
 }
 
@@ -1252,6 +1299,13 @@ function startTagFlow(event) {
   if (app.dataset.reading === "true") return;
 
   const selectedButton = event.currentTarget;
+  const selectedPersonName = selectedButton.dataset.person || "선택한 인물";
+
+  if (isPersonCompleted(selectedPersonName)) {
+    returnToFirstWithCompletedMessage(selectedPersonName);
+    return;
+  }
+
   selectedNfcName = selectedButton.dataset.person || "선택한 인물";
   renderIntroQuiz(selectedNfcName);
 
@@ -1270,9 +1324,7 @@ function startTagFlow(event) {
     scanText.textContent = "퀴즈 화면으로 이동합니다.";
 
     window.setTimeout(() => {
-      tagButtons.forEach((button) => {
-        button.disabled = false;
-      });
+      renderNfcCompletionStates();
       setStep(2);
     }, 360);
   }, 1050);
@@ -1280,6 +1332,10 @@ function startTagFlow(event) {
 
 function revealAnswer(button) {
   if (quizResolved) return;
+  if (isPersonCompleted(selectedNfcName)) {
+    returnToFirstWithCompletedMessage(selectedNfcName);
+    return;
+  }
 
   quizResolved = true;
   clearTagTimer();
@@ -1296,6 +1352,11 @@ function revealAnswer(button) {
 }
 
 function startSequentialQuiz() {
+  if (isPersonCompleted(selectedNfcName)) {
+    returnToFirstWithCompletedMessage(selectedNfcName);
+    return;
+  }
+
   activeQuizQuestions = getQuizQuestions(selectedNfcName);
   renderCompletion(selectedNfcName);
   currentQuestionIndex = 0;
@@ -1339,8 +1400,22 @@ function goToPreviousStep() {
 tagButtons.forEach((button) => button.addEventListener("click", startTagFlow));
 previousButton.addEventListener("click", goToPreviousStep);
 restartButton.addEventListener("click", resetFlow);
-nextToQuizGuide.addEventListener("click", () => setStep(4));
-guideNextButton.addEventListener("click", () => setStep(5));
+nextToQuizGuide.addEventListener("click", () => {
+  if (isPersonCompleted(selectedNfcName)) {
+    returnToFirstWithCompletedMessage(selectedNfcName);
+    return;
+  }
+
+  setStep(4);
+});
+guideNextButton.addEventListener("click", () => {
+  if (isPersonCompleted(selectedNfcName)) {
+    returnToFirstWithCompletedMessage(selectedNfcName);
+    return;
+  }
+
+  setStep(5);
+});
 startQuizButton.addEventListener("click", startSequentialQuiz);
 nextQuizButton.addEventListener("click", showNextQuizQuestion);
 explainNextButton.addEventListener("click", () => {
