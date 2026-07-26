@@ -1092,15 +1092,25 @@ function renderCompletion(personName) {
 
   const isYuGwanSun = profile.answer === "유관순";
   const isKimGu = profile.answer === "김구";
+  const isYunBongGil = profile.answer === "윤봉길";
   mapStamp.src = isYuGwanSun
     ? profile.image.src
     : isKimGu
-      ? "assets/kim-gu.jpg"
+      ? profile.image.src
+      : isYunBongGil
+        ? profile.image.src
       : "assets/yoon-stamp.png";
-  mapStamp.alt = isYuGwanSun ? "유관순 획득 도장" : isKimGu ? "김구 획득 도장" : "윤동주 획득 도장";
+  mapStamp.alt = isYuGwanSun
+    ? "유관순 획득 도장"
+    : isKimGu
+      ? "김구 획득 도장"
+      : isYunBongGil
+        ? "윤봉길 획득 도장"
+        : "윤동주 획득 도장";
   mapStamp.classList.toggle("is-second", isKimGu);
   mapStamp.classList.toggle("is-third", isYuGwanSun);
-  mapStamp.classList.toggle("is-portrait-stamp", isYuGwanSun || isKimGu);
+  mapStamp.classList.toggle("is-fourth", isYunBongGil);
+  mapStamp.classList.toggle("is-portrait-stamp", isYuGwanSun || isKimGu || isYunBongGil);
 }
 
 function resetChoices() {

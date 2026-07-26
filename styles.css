@@ -1143,6 +1143,11 @@ button {
   left: 68.2%;
 }
 
+.map-stamp.is-fourth {
+  top: 70.5%;
+  left: 29.5%;
+}
+
 .map-stamp.is-portrait-stamp {
   aspect-ratio: 1;
   object-fit: cover;
