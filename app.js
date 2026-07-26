@@ -1225,10 +1225,10 @@ function renderStampBoard(recentPersonName = selectedNfcName) {
   });
 
   stampTitle.innerHTML = hasAllStamps
-    ? "도장 5개를 모두 모았습니다!<br />다른 키링 구매 화면으로 이동하세요."
+    ? "도장 5개를 모두 모았습니다!<br />대한독립만세 화면으로 이동하세요."
     : `${completedQuestionCount}문제를 모두 완료했어요!<br />${stampedPersonName} 도장을 획득했습니다.`;
 
-  stampNextText.textContent = "다른 키링 보러가기";
+  stampNextText.textContent = hasAllStamps ? "대한독립만세 화면으로 가기" : "다른 키링 보러가기";
 }
 
 function renderIntroQuiz(personName) {
@@ -1466,7 +1466,7 @@ explainNextButton.addEventListener("click", () => {
   setStep(8);
 });
 stampNextButton.addEventListener("click", () => {
-  setStep(9);
+  setStep(loadEarnedStamps().length >= stampPeople.length ? 10 : 9);
 });
 purchaseNextButton.addEventListener("click", () => {
   if (loadEarnedStamps().length >= stampPeople.length) {
