@@ -963,8 +963,10 @@ const nextQuizButton = document.querySelector("#nextQuizButton");
 const completionPortrait = document.querySelector("#completionPortrait");
 const completionImage = document.querySelector("#completionImage");
 const completionSymbol = document.querySelector("#completionSymbol");
-const explainTitle = document.querySelector("#explain-title");
-const completionText = document.querySelector("#completionText");
+const introductionStage = document.querySelector("#introductionStage");
+const introductionName = document.querySelector("#introduction-name");
+const introductionDate = document.querySelector("#introductionDate");
+const introductionAchievement = document.querySelector("#introductionAchievement");
 const explainNextButton = document.querySelector("#explainNextButton");
 const stampNextButton = document.querySelector("#stampNextButton");
 const stampTitle = document.querySelector("#stamp-title");
@@ -1267,20 +1269,16 @@ function renderIntroQuiz(personName) {
   }
 }
 
-function renderCompletion(personName) {
+function renderStageIntroduction(personName) {
   const profile = getIntroProfile(personName);
-  const completedQuestionCount = getQuizQuestions(profile.answer).length;
-  const summaries = {
-    윤동주: "윤동주와 무장 독립운동, 신민회까지 5단계 핵심 문제를 완료했습니다.",
-    김구: "김구 선생과 대한민국 임시정부, 한인애국단과 광복군 흐름까지 5단계 핵심 문제를 완료했습니다.",
-    유관순: "유관순과 3·1 운동, 만주 무장투쟁과 의열투쟁까지 5단계 핵심 문제를 완료했습니다.",
-    윤봉길: "윤봉길 의사와 한인애국단, 의열투쟁과 임시정부 흐름까지 5단계 핵심 문제를 완료했습니다.",
-    안중근: "안중근 의사와 하얼빈 의거, 외교 독립운동과 좌우합작 흐름까지 핵심 문제를 완료했습니다.",
-  };
+  const completedLevel = Math.floor((currentQuestionIndex + 1) / 5);
 
   completionPortrait.setAttribute("aria-label", `${profile.answer} 초상`);
-  explainTitle.textContent = `${completedQuestionCount}문제를 모두 풀었습니다!`;
-  completionText.textContent = `${summaries[profile.answer] || `${profile.answer} 관련 5단계 핵심 문제를 완료했습니다.`} 이제 획득한 도장을 확인하세요.`;
+  introductionStage.textContent = `${completedLevel}단계 완료`;
+  introductionName.textContent = profile.answer;
+  introductionDate.textContent = profile.date;
+  introductionAchievement.textContent = profile.bio;
+  explainNextButton.textContent = completedLevel >= 5 ? "도장 확인하기" : `${completedLevel + 1}단계 시작하기`;
 
   completionImage.hidden = !profile.image;
   completionSymbol.hidden = Boolean(profile.image);
@@ -1295,7 +1293,7 @@ function renderCompletion(personName) {
 
 function resetChoices() {
   renderIntroQuiz(selectedNfcName);
-  renderCompletion(selectedNfcName);
+  renderStageIntroduction(selectedNfcName);
   renderStampRows();
   activeQuizQuestions = getQuizQuestions(selectedNfcName);
   currentQuestionIndex = 0;
@@ -1396,14 +1394,14 @@ function startSequentialQuiz() {
   }
 
   activeQuizQuestions = getQuizQuestions(selectedNfcName);
-  renderCompletion(selectedNfcName);
   currentQuestionIndex = 0;
   renderQuizQuestion();
   setStep(6);
 }
 
 function showNextQuizQuestion() {
-  if (currentQuestionIndex === activeQuizQuestions.length - 1) {
+  if ((currentQuestionIndex + 1) % 5 === 0) {
+    renderStageIntroduction(selectedNfcName);
     setStep(7);
     return;
   }
@@ -1465,9 +1463,16 @@ guideNextButton.addEventListener("click", () => {
 startQuizButton.addEventListener("click", startSequentialQuiz);
 nextQuizButton.addEventListener("click", showNextQuizQuestion);
 explainNextButton.addEventListener("click", () => {
-  markStampEarned(selectedNfcName);
-  renderStampBoard(selectedNfcName);
-  setStep(8);
+  if (currentQuestionIndex >= activeQuizQuestions.length - 1) {
+    markStampEarned(selectedNfcName);
+    renderStampBoard(selectedNfcName);
+    setStep(8);
+    return;
+  }
+
+  currentQuestionIndex += 1;
+  renderQuizQuestion();
+  setStep(6);
 });
 stampNextButton.addEventListener("click", () => {
   isMenuShopOpen = false;

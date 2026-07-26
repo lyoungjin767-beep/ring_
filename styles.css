@@ -792,6 +792,7 @@ button {
 .level-panel,
 .play-panel,
 .explain-panel,
+.introduction-panel,
 .stamp-panel,
 .shop-panel,
 .share-panel,
@@ -807,6 +808,7 @@ button {
 .level-panel h1,
 .play-panel h1,
 .explain-panel h1,
+.introduction-panel h1,
 .stamp-panel h1,
 .shop-panel h1,
 .share-panel h1,
@@ -1643,6 +1645,66 @@ button {
   width: 250px;
   height: 190px;
   margin: 8px 0 10px;
+}
+
+.introduction-panel {
+  padding: 2px 4px 0;
+}
+
+.introduction-stage {
+  margin: 4px 0 2px;
+  color: var(--teal);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.introduction-label {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.introduction-panel .red-portrait {
+  width: 142px;
+  height: 142px;
+  margin: 2px 0 13px;
+}
+
+.introduction-panel h1 {
+  margin: 0;
+  font-size: 27px;
+  line-height: 1.2;
+}
+
+.introduction-date {
+  margin: 7px 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.introduction-achievement {
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 16px 15px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff7e7;
+}
+
+.introduction-achievement strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--teal);
+  font-size: 14px;
+}
+
+.introduction-achievement p {
+  margin: 0;
+  color: #3f352b;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .keyring-product-grid {
