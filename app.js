@@ -1218,6 +1218,7 @@ function renderCompletion(personName) {
     completionImage.src = profile.image.src;
     completionImage.alt = profile.image.alt;
   }
+
 }
 
 function resetChoices() {

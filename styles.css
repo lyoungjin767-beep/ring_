@@ -1111,6 +1111,61 @@ button {
   justify-self: end;
 }
 
+.stamp-map {
+  position: relative;
+  width: min(100%, 230px);
+  margin: 0 auto 14px;
+  line-height: 0;
+}
+
+.stamp-map-image {
+  width: 100%;
+  max-height: 315px;
+  display: block;
+  object-fit: contain;
+}
+
+.map-stamp {
+  position: absolute;
+  top: 32%;
+  left: 30.5%;
+  width: 25%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  clip-path: circle(42%);
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 3px 4px rgba(77, 34, 24, 0.26));
+}
+
+.map-stamp.is-third {
+  top: 52%;
+  left: 48.5%;
+}
+
+.map-stamp.is-second {
+  top: 31%;
+  left: 68.2%;
+}
+
+.map-stamp.is-fourth {
+  top: 70.5%;
+  left: 29.5%;
+}
+
+.map-stamp.is-fifth {
+  top: 70.5%;
+  left: 68.2%;
+}
+
+.map-stamp.is-portrait-stamp {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 4px solid #d43a32;
+  background: #fff8ec;
+  clip-path: none;
+  mix-blend-mode: normal;
+}
+
 .quiz-progress {
   width: 100%;
   display: flex;
@@ -1278,18 +1333,15 @@ button {
 
 .stamp-map {
   position: relative;
-  width: 100%;
-  height: 264px;
-  margin: 2px 0 14px;
-  overflow: hidden;
-  border: 1px solid #d0a26d;
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 18% 24%, rgba(151, 95, 52, 0.18) 0 34px, transparent 35px),
-    radial-gradient(circle at 78% 18%, rgba(41, 111, 104, 0.13) 0 42px, transparent 43px),
-    radial-gradient(circle at 68% 78%, rgba(214, 66, 57, 0.12) 0 50px, transparent 51px),
-    linear-gradient(135deg, rgba(255, 246, 228, 0.92), rgba(239, 219, 177, 0.74));
-  box-shadow: inset 0 0 0 4px rgba(255, 253, 248, 0.48), 0 12px 22px rgba(105, 70, 35, 0.1);
+  width: min(100%, 230px);
+  height: auto;
+  margin: 0 auto 14px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  line-height: 0;
 }
 
 .stamp-map::before,
@@ -1300,59 +1352,30 @@ button {
 }
 
 .stamp-map::before {
-  inset: 18px 22px;
-  border: 1px dashed rgba(92, 63, 37, 0.26);
-  border-radius: 45% 55% 52% 48%;
-  background:
-    linear-gradient(38deg, transparent 0 42%, rgba(92, 63, 37, 0.17) 42% 43%, transparent 44%),
-    linear-gradient(142deg, transparent 0 56%, rgba(92, 63, 37, 0.12) 56% 57%, transparent 58%);
-  transform: rotate(-4deg);
+  content: none;
 }
 
 .stamp-map::after {
-  left: 24px;
-  right: 24px;
-  bottom: 34px;
-  height: 70px;
-  border: 1px solid rgba(41, 111, 104, 0.24);
-  border-top: 0;
-  border-radius: 0 0 50% 50%;
-  transform: rotate(5deg);
+  content: none;
 }
 
 .map-route {
-  position: absolute;
-  z-index: 1;
-  height: 2px;
-  border-top: 2px dashed rgba(91, 61, 34, 0.24);
-  transform-origin: left center;
-}
-
-.route-one {
-  top: 102px;
-  left: 76px;
-  width: 218px;
-  transform: rotate(12deg);
-}
-
-.route-two {
-  top: 178px;
-  left: 84px;
-  width: 196px;
-  transform: rotate(-17deg);
+  display: none;
 }
 
 .map-stamp-slot {
   position: absolute;
   z-index: 2;
-  width: 62px;
-  height: 62px;
+  width: 25%;
+  height: auto;
+  aspect-ratio: 1;
   display: grid;
   place-items: center;
   border: 2px dashed rgba(117, 80, 43, 0.5);
   border-radius: 50%;
   color: #7b6249;
   background: rgba(255, 253, 248, 0.62);
+  transform: translate(-50%, -50%);
 }
 
 .map-stamp-slot::before {
@@ -1370,7 +1393,7 @@ button {
 }
 
 .map-stamp-slot.is-current {
-  animation: stampPop 360ms ease both;
+  z-index: 3;
 }
 
 .map-stamp-slot.is-earned::before {
@@ -1390,6 +1413,10 @@ button {
 
 .map-stamp-slot.is-earned .stamp-face {
   display: grid;
+}
+
+.map-stamp-slot.is-current .stamp-face {
+  animation: stampPop 360ms ease both;
 }
 
 .stamp-face img {
@@ -1428,28 +1455,28 @@ button {
 }
 
 .slot-yoon {
-  top: 30px;
-  left: 36px;
+  top: 32%;
+  left: 30.5%;
 }
 
 .slot-kim {
-  top: 42px;
-  right: 40px;
+  top: 31%;
+  left: 68.2%;
 }
 
 .slot-yu {
-  top: 128px;
-  left: 58px;
+  top: 52%;
+  left: 48.5%;
 }
 
 .slot-yun {
-  right: 56px;
-  bottom: 48px;
+  top: 70.5%;
+  left: 29.5%;
 }
 
 .slot-ahn {
-  left: calc(50% - 31px);
-  bottom: 26px;
+  top: 70.5%;
+  left: 68.2%;
 }
 
 .stamp-medal {
@@ -1507,6 +1534,14 @@ button {
   width: 220px;
   height: 230px;
   margin: 8px 0 10px;
+}
+
+.shop-product-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
 }
 
 .mini-keyring {
