@@ -1091,10 +1091,16 @@ function renderCompletion(personName) {
   }
 
   const isYuGwanSun = profile.answer === "유관순";
-  mapStamp.src = isYuGwanSun ? profile.image.src : "assets/yoon-stamp.png";
-  mapStamp.alt = isYuGwanSun ? "유관순 획득 도장" : "윤동주 획득 도장";
+  const isKimGu = profile.answer === "김구";
+  mapStamp.src = isYuGwanSun
+    ? profile.image.src
+    : isKimGu
+      ? "assets/kim-gu.jpg"
+      : "assets/yoon-stamp.png";
+  mapStamp.alt = isYuGwanSun ? "유관순 획득 도장" : isKimGu ? "김구 획득 도장" : "윤동주 획득 도장";
+  mapStamp.classList.toggle("is-second", isKimGu);
   mapStamp.classList.toggle("is-third", isYuGwanSun);
-  mapStamp.classList.toggle("is-portrait-stamp", isYuGwanSun);
+  mapStamp.classList.toggle("is-portrait-stamp", isYuGwanSun || isKimGu);
 }
 
 function resetChoices() {
