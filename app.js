@@ -1195,11 +1195,13 @@ const menuCloseButton = document.querySelector("#menuCloseButton");
 const facilityMenuButton = document.querySelector("#facilityMenuButton");
 const menuShopButton = document.querySelector("#menuShopButton");
 const memorialMapElement = document.querySelector("#memorialMap");
+const facilityOrigin = document.querySelector("#facilityOrigin");
 const facilityCount = document.querySelector("#facilityCount");
 const facilityList = document.querySelector("#facilityList");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
-const currentFacilityLocation = {
+const facilitySearchRadiusKm = 5;
+const fallbackFacilityLocation = {
   name: "현재 위치",
   address: "서울 마포구 와우산로37길 35, B3층",
   lat: 37.5565533,
@@ -1243,6 +1245,8 @@ let activeQuizQuestions = quizQuestions;
 let memoryEarnedStamps = [];
 let isMenuShopOpen = false;
 let returnStepAfterFacilityMap = 1;
+let activeFacilityLocation = fallbackFacilityLocation;
+let facilityLocationRequestId = 0;
 let memorialLeafletMap;
 let memorialMarkerLayer;
 
@@ -1282,11 +1286,46 @@ function openMemorialFacilities() {
   setStep(12);
 }
 
-function renderFacilityList() {
-  facilityCount.textContent = `인근 시설 ${memorialFacilities.length}곳`;
+function toRadians(value) {
+  return (value * Math.PI) / 180;
+}
+
+function calculateDistanceKm(origin, target) {
+  const earthRadiusKm = 6371;
+  const latitudeDelta = toRadians(target.lat - origin.lat);
+  const longitudeDelta = toRadians(target.lon - origin.lon);
+  const originLatitude = toRadians(origin.lat);
+  const targetLatitude = toRadians(target.lat);
+  const haversine =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(originLatitude) * Math.cos(targetLatitude) * Math.sin(longitudeDelta / 2) ** 2;
+
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+}
+
+function getNearbyFacilities(origin) {
+  return memorialFacilities
+    .map((facility) => ({
+      ...facility,
+      distanceKm: calculateDistanceKm(origin, facility),
+    }))
+    .filter((facility) => facility.distanceKm <= facilitySearchRadiusKm)
+    .sort((first, second) => first.distanceKm - second.distanceKm);
+}
+
+function renderFacilityList(facilities) {
+  facilityCount.textContent = `인근 시설 ${facilities.length}곳`;
   facilityList.replaceChildren();
 
-  memorialFacilities.forEach((facility, index) => {
+  if (!facilities.length) {
+    const item = document.createElement("li");
+    item.className = "facility-empty";
+    item.textContent = "반경 5km 이내에 표시할 수 있는 독립운동 현충시설이 없습니다.";
+    facilityList.append(item);
+    return;
+  }
+
+  facilities.forEach((facility, index) => {
     const item = document.createElement("li");
     const rank = document.createElement("span");
     const content = document.createElement("div");
@@ -1311,8 +1350,9 @@ function renderFacilityList() {
   });
 }
 
-function renderMemorialFacilities() {
-  renderFacilityList();
+function renderMemorialFacilities(origin = activeFacilityLocation) {
+  const nearbyFacilities = getNearbyFacilities(origin);
+  renderFacilityList(nearbyFacilities);
 
   if (!window.L || !memorialMapElement) {
     memorialMapElement.textContent = "지도 라이브러리를 불러오지 못했습니다. 아래 목록을 확인해주세요.";
@@ -1333,9 +1373,9 @@ function renderMemorialFacilities() {
 
   memorialMarkerLayer.clearLayers();
 
-  const points = [[currentFacilityLocation.lat, currentFacilityLocation.lon]];
-  window.L.circle([currentFacilityLocation.lat, currentFacilityLocation.lon], {
-    radius: 5000,
+  const points = [[origin.lat, origin.lon]];
+  window.L.circle([origin.lat, origin.lon], {
+    radius: facilitySearchRadiusKm * 1000,
     color: "#1769ff",
     weight: 1,
     fillColor: "#1769ff",
@@ -1348,11 +1388,11 @@ function renderMemorialFacilities() {
     iconSize: [20, 20],
     iconAnchor: [10, 10],
   });
-  window.L.marker([currentFacilityLocation.lat, currentFacilityLocation.lon], { icon: currentIcon })
-    .bindPopup(`<div class="facility-popup"><strong>${escapeHtml(currentFacilityLocation.name)}</strong><span>${escapeHtml(currentFacilityLocation.address)}</span></div>`)
+  window.L.marker([origin.lat, origin.lon], { icon: currentIcon })
+    .bindPopup(`<div class="facility-popup"><strong>${escapeHtml(origin.name)}</strong><span>${escapeHtml(origin.address)}</span></div>`)
     .addTo(memorialMarkerLayer);
 
-  memorialFacilities.forEach((facility) => {
+  nearbyFacilities.forEach((facility) => {
     points.push([facility.lat, facility.lon]);
     window.L.circleMarker([facility.lat, facility.lon], {
       radius: 6,
@@ -1365,8 +1405,54 @@ function renderMemorialFacilities() {
       .addTo(memorialMarkerLayer);
   });
 
-  memorialLeafletMap.fitBounds(window.L.latLngBounds(points).pad(0.08));
+  if (nearbyFacilities.length) {
+    memorialLeafletMap.fitBounds(window.L.latLngBounds(points).pad(0.08));
+  } else {
+    memorialLeafletMap.setView([origin.lat, origin.lon], 13);
+  }
+
   window.setTimeout(() => memorialLeafletMap.invalidateSize(), 120);
+}
+
+function renderMemorialFacilitiesFromFallback(message) {
+  activeFacilityLocation = fallbackFacilityLocation;
+  facilityOrigin.textContent = message;
+  renderMemorialFacilities(activeFacilityLocation);
+}
+
+function updateMemorialFacilitiesForCurrentLocation() {
+  const requestId = facilityLocationRequestId + 1;
+  facilityLocationRequestId = requestId;
+  facilityOrigin.textContent = "현재 위치를 확인하는 중입니다.";
+
+  if (!navigator.geolocation) {
+    renderMemorialFacilitiesFromFallback(`위치 확인을 지원하지 않아 ${fallbackFacilityLocation.address} 기준으로 표시합니다.`);
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      if (requestId !== facilityLocationRequestId) return;
+
+      activeFacilityLocation = {
+        name: "내 위치",
+        address: "휴대폰 현재 위치 기준",
+        lat: position.coords.latitude,
+        lon: position.coords.longitude,
+      };
+      facilityOrigin.textContent = "현재 위치 기준";
+      renderMemorialFacilities(activeFacilityLocation);
+    },
+    () => {
+      if (requestId !== facilityLocationRequestId) return;
+      renderMemorialFacilitiesFromFallback(`위치 권한이 꺼져 있어 ${fallbackFacilityLocation.address} 기준으로 표시합니다.`);
+    },
+    {
+      enableHighAccuracy: true,
+      maximumAge: 60000,
+      timeout: 10000,
+    }
+  );
 }
 
 function setStep(step) {
@@ -1398,7 +1484,7 @@ function setStep(step) {
   }
 
   if (step === 12) {
-    window.setTimeout(renderMemorialFacilities, 0);
+    window.setTimeout(updateMemorialFacilitiesForCurrentLocation, 0);
   }
 
   previousButton.disabled = step <= 1;
