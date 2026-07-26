@@ -1229,8 +1229,8 @@ function resetChoices() {
   currentQuestionIndex = 0;
   renderQuizQuestion();
   shareButton.textContent = "공유하기";
-  keywordButton.textContent = "최종 키워드 신청하기";
-  keywordNote.textContent = "최종 키워드는 신청 후 변경할 수 없습니다.";
+  keywordButton.textContent = "최종 리워드 신청하기";
+  keywordNote.textContent = "최종 리워드는 신청 후 변경할 수 없습니다.";
 }
 
 function resetFlow() {
@@ -1413,7 +1413,7 @@ shareButton.addEventListener("click", () => {
 
 keywordButton.addEventListener("click", () => {
   keywordButton.textContent = "신청 완료";
-  keywordNote.textContent = "최종 키워드 신청이 완료되었습니다.";
+  keywordNote.textContent = "최종 리워드 신청이 완료되었습니다.";
 });
 
 resetFlow();
