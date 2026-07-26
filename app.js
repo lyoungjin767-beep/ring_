@@ -976,6 +976,7 @@ const shareButton = document.querySelector("#shareButton");
 const keywordButton = document.querySelector("#keywordButton");
 const keywordNote = document.querySelector("#keywordNote");
 const finalGateButton = document.querySelector("#finalGateButton");
+const resetAllButton = document.querySelector("#resetAllButton");
 const finalRestartButton = document.querySelector("#finalRestartButton");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
@@ -1072,6 +1073,14 @@ function saveEarnedStamps(stamps) {
 
   try {
     window.localStorage.setItem(stampStorageKey, JSON.stringify(stamps));
+  } catch {}
+}
+
+function clearEarnedStamps() {
+  memoryEarnedStamps = [];
+
+  try {
+    window.localStorage.removeItem(stampStorageKey);
   } catch {}
 }
 
@@ -1299,6 +1308,13 @@ function resetFlow() {
   setStep(1);
 }
 
+function resetAllProgress() {
+  clearEarnedStamps();
+  resetFlow();
+  scanTitle.textContent = "전체 문제를 초기화했습니다";
+  scanText.textContent = "다시 NFC 인물을 선택해주세요.";
+}
+
 function startTagFlow(event) {
   if (app.dataset.reading === "true") return;
 
@@ -1437,6 +1453,7 @@ stampNextButton.addEventListener("click", () => {
 });
 purchaseNextButton.addEventListener("click", () => setStep(10));
 finalGateButton.addEventListener("click", () => setStep(11));
+resetAllButton.addEventListener("click", resetAllProgress);
 finalRestartButton.addEventListener("click", resetFlow);
 
 answerGrid.addEventListener("click", (event) => {
