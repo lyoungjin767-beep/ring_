@@ -1117,9 +1117,48 @@ const finalRewardButton = document.querySelector("#finalRewardButton");
 const menuButtons = [...document.querySelectorAll(".icon-button")];
 const menuOverlay = document.querySelector("#menuOverlay");
 const menuCloseButton = document.querySelector("#menuCloseButton");
+const facilityMenuButton = document.querySelector("#facilityMenuButton");
 const menuShopButton = document.querySelector("#menuShopButton");
+const memorialMapElement = document.querySelector("#memorialMap");
+const facilityCount = document.querySelector("#facilityCount");
+const facilityList = document.querySelector("#facilityList");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
+const currentFacilityLocation = {
+  name: "현재 위치",
+  address: "서울 마포구 와우산로37길 35, B3층",
+  lat: 37.5565533,
+  lon: 126.9290049,
+};
+const memorialFacilities = [
+  { name: "마포전차종점 3·1운동 만세 시위지", kind: "장소", theme: "3·1운동", address: "서울특별시 마포구마포동 140", lat: 37.53672, lon: 126.94288, distanceKm: 2.52 },
+  { name: "3·1독립선언 기념탑", kind: "탑", theme: "3·1운동", address: "서울특별시 서대문구현저동 101번지(독립공원 내)", lat: 37.57386, lon: 126.9541, distanceKm: 2.93 },
+  { name: "독립관", kind: "사당", theme: "한말구국운동", address: "서울특별시 서대문구현저동 101(독립공원 내)", lat: 37.57386, lon: 126.9541, distanceKm: 2.93 },
+  { name: "서대문형무소 역사관", kind: "기념관", theme: "기타", address: "서울특별시 서대문구현저동 101번지(독립공원 내)", lat: 37.57386, lon: 126.9541, distanceKm: 2.93 },
+  { name: "순국선열 추념탑", kind: "탑", theme: "기타", address: "서울특별시 서대문구현저동 101번지(독립공원 내)", lat: 37.57386, lon: 126.9541, distanceKm: 2.93 },
+  { name: "이충순 자결터", kind: "장소", theme: "3·1운동", address: "서울특별시 중구서소문로 88(순화동)", lat: 37.5590779, lon: 126.9623962, distanceKm: 2.96 },
+  { name: "백범 김구 기념관", kind: "기념관", theme: "해외운동", address: "서울특별시 용산구임정로 26 (효창동)", lat: 37.5440616, lon: 126.9592148, distanceKm: 3 },
+  { name: "유관순열사동상", kind: "동상", theme: "3·1운동", address: "서울특별시 서대문구통일로 251 (현저동)", lat: 37.5744236, lon: 126.9550476, distanceKm: 3.04 },
+  { name: "충정공 민영환선생 동상", kind: "동상", theme: "한말구국운동", address: "서울특별시 서대문구충정로 8(충정로3가)", lat: 37.5597337, lon: 126.9632067, distanceKm: 3.04 },
+  { name: "국립대한민국임시정부기념관", kind: "기념관", theme: "해외운동", address: "서울특별시 서대문구통일로 279-24 (현저동)", lat: 37.5760624, lon: 126.9543843, distanceKm: 3.12 },
+  { name: "의열사", kind: "사당", theme: "기타", address: "서울특별시 용산구효창동 255(효창공원 내)", lat: 37.54341, lon: 126.96037, distanceKm: 3.13 },
+  { name: "이봉창의사 동상", kind: "동상", theme: "의열투쟁", address: "서울특별시 용산구효창동 255(효창공원 내)", lat: 37.54341, lon: 126.96037, distanceKm: 3.13 },
+  { name: "송재 서재필선생 상", kind: "동상", theme: "문화운동", address: "서울특별시 서대문구통일로 지하247(현저동)", lat: 37.5733998, lon: 126.9590101, distanceKm: 3.24 },
+  { name: "유관순기념관", kind: "기념관", theme: "3·1운동", address: "서울특별시 중구통일로4길 30-1 (순화동)", lat: 37.565063, lon: 126.9684671, distanceKm: 3.6 },
+  { name: "이회영기념관", kind: "기념관", theme: "해외운동", address: "서울특별시 종로구사직로6길 15 (사직동)", lat: 37.5725382, lon: 126.9656122, distanceKm: 3.68 },
+  { name: "대한독립 만세운동 표지석", kind: "비석", theme: "3·1운동", address: "서울특별시 영등포구양평로21길 10(양평동5가)", lat: 37.5373912, lon: 126.8927761, distanceKm: 3.84 },
+  { name: "정동교회 이필주 사택 터", kind: "장소", theme: "3·1운동", address: "서울특별시 중구정동 34-3", lat: 37.5661683, lon: 126.9726202, distanceKm: 3.99 },
+  { name: "안중근의사 기념관", kind: "기념관", theme: "의열투쟁", address: "서울특별시 중구소월로 91 (남대문로5가)", lat: 37.5589937, lon: 126.9757506, distanceKm: 4.13 },
+  { name: "대한제국군서울시가전투지", kind: "장소", theme: "기타", address: "서울특별시 중구남대문로4가 45", lat: 37.5608824, lon: 126.9764175, distanceKm: 4.21 },
+  { name: "조선여자기독교청년회 회관 터", kind: "장소", theme: "학생운동", address: "서울특별시 종로구신문로1가 33", lat: 37.57017, lon: 126.97417, distanceKm: 4.26 },
+  { name: "상동교회", kind: "장소", theme: "한말구국운동", address: "서울특별시 중구남창동 1-1", lat: 37.5577353, lon: 126.9774875, distanceKm: 4.28 },
+  { name: "경성부민관 폭탄의거지", kind: "장소", theme: "의열투쟁", address: "서울특별시 중구태평로1가 60-1", lat: 37.56727, lon: 126.977, distanceKm: 4.4 },
+  { name: "오화영 사택 터", kind: "장소", theme: "3·1운동", address: "서울특별시 종로구도렴동 32", lat: 37.5734581, lon: 126.9743691, distanceKm: 4.42 },
+  { name: "안중근의사 동상", kind: "동상", theme: "의열투쟁", address: "서울특별시 용산구후암동 30-80", lat: 37.55011, lon: 126.98028, distanceKm: 4.58 },
+  { name: "백범 김구선생 동상", kind: "동상", theme: "해외운동", address: "서울특별시 중구회현동1가 100-115(남산공원 백범광장 내)", lat: 37.55689, lon: 126.98138, distanceKm: 4.62 },
+  { name: "성재 이시영선생 동상", kind: "동상", theme: "해외운동", address: "서울특별시 중구회현동1가 100-115(남산공원 백범광장 내)", lat: 37.55689, lon: 126.98138, distanceKm: 4.62 },
+  { name: "독립협회창립총회 터", kind: "장소", theme: "한말구국운동", address: "서울특별시 종로구세종로 82-1", lat: 37.5757452, lon: 126.9766915, distanceKm: 4.71 },
+];
 
 let tagTimer;
 let quizResolved = false;
@@ -1128,11 +1167,28 @@ let selectedNfcName = "";
 let activeQuizQuestions = quizQuestions;
 let memoryEarnedStamps = [];
 let isMenuShopOpen = false;
+let returnStepAfterFacilityMap = 1;
+let memorialLeafletMap;
+let memorialMarkerLayer;
 
 function clearTagTimer() {
   if (!tagTimer) return;
   window.clearTimeout(tagTimer);
   tagTimer = undefined;
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#039;",
+    };
+
+    return entities[character];
+  });
 }
 
 function openMenu() {
@@ -1144,8 +1200,102 @@ function closeMenu() {
   menuOverlay.hidden = true;
 }
 
+function openMemorialFacilities() {
+  returnStepAfterFacilityMap = Number(app.dataset.step) || 1;
+  isMenuShopOpen = false;
+  closeMenu();
+  setStep(12);
+}
+
+function renderFacilityList() {
+  facilityCount.textContent = `인근 시설 ${memorialFacilities.length}곳`;
+  facilityList.replaceChildren();
+
+  memorialFacilities.forEach((facility, index) => {
+    const item = document.createElement("li");
+    const rank = document.createElement("span");
+    const content = document.createElement("div");
+    const name = document.createElement("strong");
+    const meta = document.createElement("p");
+    const address = document.createElement("p");
+    const link = document.createElement("a");
+
+    rank.className = "facility-rank";
+    rank.textContent = String(index + 1);
+    name.textContent = facility.name;
+    meta.textContent = `${facility.distanceKm.toFixed(2)}km · ${facility.kind} · ${facility.theme}`;
+    address.textContent = facility.address;
+    link.href = `https://www.openstreetmap.org/?mlat=${facility.lat}&mlon=${facility.lon}#map=16/${facility.lat}/${facility.lon}`;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = "지도에서 보기";
+
+    content.append(name, meta, address, link);
+    item.append(rank, content);
+    facilityList.append(item);
+  });
+}
+
+function renderMemorialFacilities() {
+  renderFacilityList();
+
+  if (!window.L || !memorialMapElement) {
+    memorialMapElement.textContent = "지도 라이브러리를 불러오지 못했습니다. 아래 목록을 확인해주세요.";
+    return;
+  }
+
+  if (!memorialLeafletMap) {
+    memorialLeafletMap = window.L.map(memorialMapElement, {
+      scrollWheelZoom: false,
+      zoomControl: true,
+    });
+    window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(memorialLeafletMap);
+    memorialMarkerLayer = window.L.layerGroup().addTo(memorialLeafletMap);
+  }
+
+  memorialMarkerLayer.clearLayers();
+
+  const points = [[currentFacilityLocation.lat, currentFacilityLocation.lon]];
+  window.L.circle([currentFacilityLocation.lat, currentFacilityLocation.lon], {
+    radius: 5000,
+    color: "#1769ff",
+    weight: 1,
+    fillColor: "#1769ff",
+    fillOpacity: 0.08,
+  }).addTo(memorialMarkerLayer);
+
+  const currentIcon = window.L.divIcon({
+    className: "",
+    html: '<span class="facility-current-marker"></span>',
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+  });
+  window.L.marker([currentFacilityLocation.lat, currentFacilityLocation.lon], { icon: currentIcon })
+    .bindPopup(`<div class="facility-popup"><strong>${escapeHtml(currentFacilityLocation.name)}</strong><span>${escapeHtml(currentFacilityLocation.address)}</span></div>`)
+    .addTo(memorialMarkerLayer);
+
+  memorialFacilities.forEach((facility) => {
+    points.push([facility.lat, facility.lon]);
+    window.L.circleMarker([facility.lat, facility.lon], {
+      radius: 6,
+      color: "#a62c25",
+      weight: 2,
+      fillColor: "#d64239",
+      fillOpacity: 0.88,
+    })
+      .bindPopup(`<div class="facility-popup"><strong>${escapeHtml(facility.name)}</strong><span>${facility.distanceKm.toFixed(2)}km · ${escapeHtml(facility.kind)} · ${escapeHtml(facility.theme)}</span><span>${escapeHtml(facility.address)}</span></div>`)
+      .addTo(memorialMarkerLayer);
+  });
+
+  memorialLeafletMap.fitBounds(window.L.latLngBounds(points).pad(0.08));
+  window.setTimeout(() => memorialLeafletMap.invalidateSize(), 120);
+}
+
 function setStep(step) {
-  if (step >= 10 && loadEarnedStamps().length < stampPeople.length) {
+  if ((step === 10 || step === 11) && loadEarnedStamps().length < stampPeople.length) {
     step = 9;
   }
 
@@ -1170,6 +1320,10 @@ function setStep(step) {
 
   if (step === 1) {
     renderNfcCompletionStates();
+  }
+
+  if (step === 12) {
+    window.setTimeout(renderMemorialFacilities, 0);
   }
 
   previousButton.disabled = step <= 1;
@@ -1553,6 +1707,11 @@ function showNextQuizQuestion() {
 function goToPreviousStep() {
   const currentStep = Number(app.dataset.step) || 1;
 
+  if (currentStep === 12) {
+    setStep(returnStepAfterFacilityMap);
+    return;
+  }
+
   const previousStep = Math.max(1, currentStep - 1);
 
   if (previousStep === currentStep) return;
@@ -1574,6 +1733,7 @@ menuCloseButton.addEventListener("click", closeMenu);
 menuOverlay.addEventListener("click", (event) => {
   if (event.target === menuOverlay) closeMenu();
 });
+facilityMenuButton.addEventListener("click", openMemorialFacilities);
 menuShopButton.addEventListener("click", () => {
   closeMenu();
   isMenuShopOpen = true;

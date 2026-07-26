@@ -8,7 +8,8 @@
       content="3D 키링 NFC 태그 후 독립운동가 퀴즈와 정답 공개가 차례대로 이어지는 웹 서비스 화면입니다."
     />
     <title>기억하링 NFC 키링</title>
-    <link rel="stylesheet" href="styles.css?v=20260726-reset-all" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css?v=20260726-facility-map" />
   </head>
   <body>
     <main class="app" data-step="1">
@@ -445,6 +446,35 @@
               </section>
             </div>
           </article>
+
+          <article class="stage stage-twelve" data-stage="12">
+            <div class="stage-label">
+              <span class="stage-number">12</span>
+              <strong>현충시설 위치</strong>
+            </div>
+            <div class="phone-screen">
+              <header class="phone-header">
+                <span>기억하링</span>
+                <button class="icon-button" type="button" aria-label="메뉴">
+                  <span></span><span></span><span></span>
+                </button>
+              </header>
+
+              <section class="facility-panel" aria-labelledby="facility-title">
+                <h1 id="facility-title">독립운동 현충시설 위치</h1>
+                <p class="facility-origin">현재 위치: 서울 마포구 와우산로37길 35, B3층</p>
+                <div class="facility-map" id="memorialMap" aria-label="반경 5km 이내 독립운동 현충시설 지도">
+                  <span>지도를 불러오는 중입니다.</span>
+                </div>
+                <div class="facility-summary">
+                  <strong id="facilityCount">인근 시설 0곳</strong>
+                  <span>반경 5km 이내</span>
+                </div>
+                <ol class="facility-list" id="facilityList"></ol>
+                <p class="facility-source">자료: 20260725_독립운동 현충시설 리스트 (1)</p>
+              </section>
+            </div>
+          </article>
         </div>
 
         <nav class="flow-controls" aria-label="단계 제어">
@@ -452,6 +482,7 @@
           <button class="restart-button" id="restartButton" type="button">처음부터</button>
           <div class="step-dots" aria-hidden="true">
             <span class="dot is-active"></span>
+            <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
@@ -474,12 +505,13 @@
           <button class="menu-close" id="menuCloseButton" type="button" aria-label="메뉴 닫기">×</button>
         </div>
         <nav class="menu-list" aria-label="메뉴 목록">
-          <button class="menu-item" type="button">독립운동 현충시설 위치</button>
+          <button class="menu-item" id="facilityMenuButton" type="button">독립운동 현충시설 위치</button>
           <button class="menu-item" id="menuShopButton" type="button">다른키링 구매하기</button>
         </nav>
       </section>
     </div>
 
-    <script src="app.js?v=20260726-activist-photos"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js?v=20260726-facility-map"></script>
   </body>
 </html>
