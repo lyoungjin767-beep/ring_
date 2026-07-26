@@ -991,6 +991,7 @@ let currentQuestionIndex = 0;
 let selectedNfcName = "";
 let activeQuizQuestions = quizQuestions;
 let memoryEarnedStamps = [];
+let isMenuShopOpen = false;
 
 function clearTagTimer() {
   if (!tagTimer) return;
@@ -1036,6 +1037,7 @@ function setStep(step) {
   }
 
   previousButton.disabled = step <= 1;
+  previousButton.hidden = step === 9 && isMenuShopOpen;
 }
 
 function getQuizQuestions(personName) {
@@ -1308,6 +1310,7 @@ function resetFlow() {
   quizResolved = false;
   app.dataset.reading = "false";
   selectedNfcName = "";
+  isMenuShopOpen = false;
   tagButtons.forEach((button) => {
     button.disabled = false;
     button.classList.remove("is-selected");
@@ -1435,6 +1438,7 @@ menuOverlay.addEventListener("click", (event) => {
 });
 menuShopButton.addEventListener("click", () => {
   closeMenu();
+  isMenuShopOpen = true;
   setStep(9);
 });
 document.addEventListener("keydown", (event) => {
@@ -1466,6 +1470,7 @@ explainNextButton.addEventListener("click", () => {
   setStep(8);
 });
 stampNextButton.addEventListener("click", () => {
+  isMenuShopOpen = false;
   setStep(loadEarnedStamps().length >= stampPeople.length ? 10 : 9);
 });
 purchaseNextButton.addEventListener("click", () => {
