@@ -1120,6 +1120,7 @@ const activistPhotoSources = {
   안창호: "assets/activist-ahn-changho.jpg",
   김구: "assets/activist-kim-gu.jpg",
   박은식: "assets/activist-park-eunsik.jpg",
+  김원봉: "assets/activist-kim-wonbong.jpg",
   이봉창: "assets/activist-lee-bongchang.jpg",
   강우규: "assets/activist-kang-woogyu.jpg",
   유관순: "assets/activist-yu-gwansun.jpg",
