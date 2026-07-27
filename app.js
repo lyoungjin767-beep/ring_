@@ -1198,17 +1198,19 @@ const menuShopButton = document.querySelector("#menuShopButton");
 const memorialMapElement = document.querySelector("#memorialMap");
 const facilityOrigin = document.querySelector("#facilityOrigin");
 const facilityCount = document.querySelector("#facilityCount");
+const facilitySummaryNote = facilityCount?.nextElementSibling;
 const facilityList = document.querySelector("#facilityList");
 const stampPeople = ["윤동주", "김구", "유관순", "윤봉길", "안중근"];
 const stampStorageKey = "gieokharing-earned-stamps";
 const facilitySearchRadiusKm = 5;
+const memorialFacilitiesPath = "assets/memorial-facilities.json";
 const fallbackFacilityLocation = {
   name: "현재 위치",
   address: "서울 마포구 와우산로37길 35, B3층",
   lat: 37.5565533,
   lon: 126.9290049,
 };
-const memorialFacilities = [
+const fallbackMemorialFacilities = [
   { name: "마포전차종점 3·1운동 만세 시위지", kind: "장소", theme: "3·1운동", address: "서울특별시 마포구마포동 140", lat: 37.53672, lon: 126.94288, distanceKm: 2.52 },
   { name: "3·1독립선언 기념탑", kind: "탑", theme: "3·1운동", address: "서울특별시 서대문구현저동 101번지(독립공원 내)", lat: 37.57386, lon: 126.9541, distanceKm: 2.93 },
   { name: "독립관", kind: "사당", theme: "한말구국운동", address: "서울특별시 서대문구현저동 101(독립공원 내)", lat: 37.57386, lon: 126.9541, distanceKm: 2.93 },
@@ -1237,6 +1239,10 @@ const memorialFacilities = [
   { name: "성재 이시영선생 동상", kind: "동상", theme: "해외운동", address: "서울특별시 중구회현동1가 100-115(남산공원 백범광장 내)", lat: 37.55689, lon: 126.98138, distanceKm: 4.62 },
   { name: "독립협회창립총회 터", kind: "장소", theme: "한말구국운동", address: "서울특별시 종로구세종로 82-1", lat: 37.5757452, lon: 126.9766915, distanceKm: 4.71 },
 ];
+let memorialFacilities = fallbackMemorialFacilities;
+let memorialFacilityLoadPromise;
+let memorialFacilitySourceTotal = fallbackMemorialFacilities.length;
+let memorialFacilityGeocodedTotal = fallbackMemorialFacilities.length;
 
 let tagTimer;
 let quizResolved = false;
@@ -1304,6 +1310,56 @@ function calculateDistanceKm(origin, target) {
   return earthRadiusKm * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
 }
 
+function normalizeMemorialFacility(facility) {
+  const lat = Number(facility.lat);
+  const lon = Number(facility.lon);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+    return undefined;
+  }
+
+  return {
+    name: facility.name || "이름 없는 시설",
+    kind: facility.kind || "시설",
+    theme: facility.theme || "기타",
+    address: facility.address || "",
+    geocodeStatus: facility.geocodeStatus || "ok",
+    lat,
+    lon,
+  };
+}
+
+function applyMemorialFacilityPayload(payload) {
+  const sourceRows = Array.isArray(payload?.facilities) ? payload.facilities : [];
+  const geocodedRows = sourceRows.map(normalizeMemorialFacility).filter(Boolean);
+
+  memorialFacilities = geocodedRows.length ? geocodedRows : fallbackMemorialFacilities;
+  memorialFacilitySourceTotal = Number(payload?.total) || sourceRows.length || memorialFacilities.length;
+  memorialFacilityGeocodedTotal = memorialFacilities.length;
+}
+
+function loadMemorialFacilities() {
+  if (memorialFacilityLoadPromise) {
+    return memorialFacilityLoadPromise;
+  }
+
+  memorialFacilityLoadPromise = fetch(memorialFacilitiesPath)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Memorial facility data was not loaded.");
+      }
+      return response.json();
+    })
+    .then(applyMemorialFacilityPayload)
+    .catch(() => {
+      memorialFacilities = fallbackMemorialFacilities;
+      memorialFacilitySourceTotal = fallbackMemorialFacilities.length;
+      memorialFacilityGeocodedTotal = fallbackMemorialFacilities.length;
+    });
+
+  return memorialFacilityLoadPromise;
+}
+
 function getNearbyFacilities(origin) {
   return memorialFacilities
     .map((facility) => ({
@@ -1316,12 +1372,18 @@ function getNearbyFacilities(origin) {
 
 function renderFacilityList(facilities) {
   facilityCount.textContent = `인근 시설 ${facilities.length}곳`;
+  if (facilitySummaryNote) {
+    facilitySummaryNote.textContent =
+      memorialFacilityGeocodedTotal >= memorialFacilitySourceTotal
+        ? "반경 5km 이내"
+        : `좌표 ${memorialFacilityGeocodedTotal}/${memorialFacilitySourceTotal}`;
+  }
   facilityList.replaceChildren();
 
   if (!facilities.length) {
     const item = document.createElement("li");
     item.className = "facility-empty";
-    item.textContent = "반경 5km 이내에 표시할 수 있는 독립운동 현충시설이 없습니다.";
+    item.textContent = "좌표가 등록된 시설 중 반경 5km 이내 현충시설이 없습니다.";
     facilityList.append(item);
     return;
   }
@@ -1338,7 +1400,12 @@ function renderFacilityList(facilities) {
     rank.className = "facility-rank";
     rank.textContent = String(index + 1);
     name.textContent = facility.name;
-    meta.textContent = `${facility.distanceKm.toFixed(2)}km · ${facility.kind} · ${facility.theme}`;
+    meta.textContent = [
+      `${facility.distanceKm.toFixed(2)}km`,
+      facility.kind,
+      facility.theme,
+      facility.geocodeStatus === "approx" ? "대략 위치" : "",
+    ].filter(Boolean).join(" · ");
     address.textContent = facility.address;
     link.href = `https://www.openstreetmap.org/?mlat=${facility.lat}&mlon=${facility.lon}#map=16/${facility.lat}/${facility.lon}`;
     link.target = "_blank";
@@ -1402,7 +1469,12 @@ function renderMemorialFacilities(origin = activeFacilityLocation) {
       fillColor: "#d64239",
       fillOpacity: 0.88,
     })
-      .bindPopup(`<div class="facility-popup"><strong>${escapeHtml(facility.name)}</strong><span>${facility.distanceKm.toFixed(2)}km · ${escapeHtml(facility.kind)} · ${escapeHtml(facility.theme)}</span><span>${escapeHtml(facility.address)}</span></div>`)
+      .bindPopup(`<div class="facility-popup"><strong>${escapeHtml(facility.name)}</strong><span>${[
+        `${facility.distanceKm.toFixed(2)}km`,
+        facility.kind,
+        facility.theme,
+        facility.geocodeStatus === "approx" ? "대략 위치" : "",
+      ].filter(Boolean).map(escapeHtml).join(" · ")}</span><span>${escapeHtml(facility.address)}</span></div>`)
       .addTo(memorialMarkerLayer);
   });
 
@@ -1424,36 +1496,42 @@ function renderMemorialFacilitiesFromFallback(message) {
 function updateMemorialFacilitiesForCurrentLocation() {
   const requestId = facilityLocationRequestId + 1;
   facilityLocationRequestId = requestId;
-  facilityOrigin.textContent = "현재 위치를 확인하는 중입니다.";
+  facilityOrigin.textContent = "현충시설 데이터를 불러오는 중입니다.";
 
-  if (!navigator.geolocation) {
-    renderMemorialFacilitiesFromFallback(`위치 확인을 지원하지 않아 ${fallbackFacilityLocation.address} 기준으로 표시합니다.`);
-    return;
-  }
+  loadMemorialFacilities().then(() => {
+    if (requestId !== facilityLocationRequestId) return;
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      if (requestId !== facilityLocationRequestId) return;
+    facilityOrigin.textContent = "현재 위치를 확인하는 중입니다.";
 
-      activeFacilityLocation = {
-        name: "내 위치",
-        address: "휴대폰 현재 위치 기준",
-        lat: position.coords.latitude,
-        lon: position.coords.longitude,
-      };
-      facilityOrigin.textContent = "현재 위치 기준";
-      renderMemorialFacilities(activeFacilityLocation);
-    },
-    () => {
-      if (requestId !== facilityLocationRequestId) return;
-      renderMemorialFacilitiesFromFallback(`위치 권한이 꺼져 있어 ${fallbackFacilityLocation.address} 기준으로 표시합니다.`);
-    },
-    {
-      enableHighAccuracy: true,
-      maximumAge: 60000,
-      timeout: 10000,
+    if (!navigator.geolocation) {
+      renderMemorialFacilitiesFromFallback(`위치 확인을 지원하지 않아 ${fallbackFacilityLocation.address} 기준으로 표시합니다.`);
+      return;
     }
-  );
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (requestId !== facilityLocationRequestId) return;
+
+        activeFacilityLocation = {
+          name: "내 위치",
+          address: "휴대폰 현재 위치 기준",
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        };
+        facilityOrigin.textContent = "현재 위치 기준";
+        renderMemorialFacilities(activeFacilityLocation);
+      },
+      () => {
+        if (requestId !== facilityLocationRequestId) return;
+        renderMemorialFacilitiesFromFallback(`위치 권한이 꺼져 있어 ${fallbackFacilityLocation.address} 기준으로 표시합니다.`);
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 60000,
+        timeout: 10000,
+      }
+    );
+  });
 }
 
 function setStep(step) {
